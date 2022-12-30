@@ -15,6 +15,13 @@ export default defineNuxtConfig({
         apiSecret: '123',
         // Keys within public are also exposed client-side
         public: { apiBase: '/api' }
-    }
+    },
 
+    // https://nuxt.com/docs/getting-started/transitions
+    app: {
+        pageTransition:
+        {
+            name: 'page', mode: 'out-in'
+        }
+    }
 })
