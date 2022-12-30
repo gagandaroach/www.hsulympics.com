@@ -3,10 +3,9 @@
 export default defineAppConfig({
     title: 'Hsulympics 2022',
     theme: {
-      dark: true,
-      colors: {
-        primary: '#ff0000'
-      }
+        // dark: true,
+        colors: {
+            primary: 'bg-red-200',
+        }
     }
-  })
-  
+})

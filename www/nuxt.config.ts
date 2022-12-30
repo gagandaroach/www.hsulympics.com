@@ -17,7 +17,7 @@ export default defineNuxtConfig({
         public: { apiBase: '/api' }
     },
 
-    // https://nuxt.com/docs/getting-started/transitions
+    //
     app: {
         pageTransition:
         {

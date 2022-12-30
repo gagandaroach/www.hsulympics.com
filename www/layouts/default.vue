@@ -1,6 +1,6 @@
 <!-- https://nuxt.com/docs/getting-started/views#layouts -->
 <template>
-  <div>
+  <div class="flex flex-col bg-gray-50 h-screen justify-between">
     <AppHeader />
     <slot />
     <AppFooter />
@@ -18,7 +18,7 @@ useHead({
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+  transition: all 0.25s;
 }
 .page-enter-from,
 .page-leave-to {
