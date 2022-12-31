@@ -12,11 +12,11 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 const HSULYMPICS_SPREADSHEET_ID = '1OaO7VSl2fXM54-O-pl9KcovbzThR9YBSe4SbYGsJfn4'
 
 const HSULYMPICS_SPREADSHEET_RANGES = [
-  "Scores!A1:K6",
-  "Teams!A1:G6",
-  "Games!A1:C11",
-  "Players!A1:D28",
-  "Settings!A1:B1"
+  "Scores!A1:Z50",
+  "Teams!A1:Z50",
+  "Games!A1:Z50",
+  "Players!A1:Z50",
+  "Settings!A1:Z50"
 ]
 
 const HSULYMPICS_SPREADSHEET_SHEETS = {
@@ -82,26 +82,82 @@ async function authorize() {
 
 function _parseHsuSettings(sheet) {
   var settings = {}
-  sheet.values.forEach((val) => {
-    settings[val[0]] = val[1]
-  })
+  if (sheet.values && sheet.values.length > 0)
+  {
+    sheet.values.forEach((val) => {
+      settings[val[0]] = val[1]
+    })
+  }
   return settings
 }
 
-function _parseHsuPlayers() {
-
+function _parseHsuPlayers(sheet) {
+  var players = {}
+  for (let i = 1; i < sheet.values.length; i++) {
+    const row = sheet.values[i];
+    var player = {
+      name: row[0],
+      team: row[1],
+      zodiac: row[2],
+      password: row[3]
+    }
+    players[player.name] = player
+  }
+  return players
 }
 
-function _parseHsuGames() {
-
+function _parseHsuGames(sheet) {
+  var games = {}
+  for (let i = 1; i < sheet.values.length; i++) {
+    const row = sheet.values[i];
+    var game = {
+      id: row[0],
+      name: row[1],
+      hidden: row[2],
+      obj: row[3],
+      rules: row[4],
+      format: row[5],
+      scoring: row[6]
+    }
+    games[game.id] = game
+  }
+  return games
 }
 
-function _parseHsuScores() {
-
+function _parseHsuScores(sheet) {
+  var game_scores = {}
+  num_games = sheet.values.length - 1
+  num_teams = sheet.values[0].length - 2
+  console.log(num_games)
+  for (let i = 1; i < sheet.values.length; i++) {
+    const row = sheet.values[i];
+    game_score = {
+      id: row[0],
+      scores: new Array(num_teams),
+      hidden: row[1]
+    };
+    for (let team_idx = 0; team_idx < num_teams; team_idx++) {
+      game_score.scores[team_idx] = row[2 + team_idx];
+    };
+    game_scores[game_score.id] = game_score;
+  }
+  return game_scores
 }
 
-function _parseHsuTeams() {
+function _parseHsuTeams(sheet) {
+  var teams = {}
+  
+  for (let i = 1; i < sheet.values.length; i++) {
+    const row = sheet.values[i];
+    var team = {
+      id: row[0],
+      name: row[1],
+      members: row[2]
+    }
+    teams[team.name] = team
+  }
 
+  return teams
 }
 
 function _parseHsuSheets(hsu_sheets) {
