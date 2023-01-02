@@ -58,7 +58,7 @@ function _parseHsuGames(sheet) {
     var game = {
       id: row[0],
       name: row[1],
-      hidden: row[2],
+      show: row[2],
       obj: row[3],
       rules: row[4],
       format: row[5],
@@ -79,7 +79,7 @@ function _parseHsuScores(sheet) {
     var game_score = {
       id: row[0],
       scores: new Array(num_teams),
-      hidden: row[1]
+      show: row[1]
     };
     for (let team_idx = 0; team_idx < num_teams; team_idx++) {
       game_score.scores[team_idx] = row[2 + team_idx];
@@ -117,7 +117,7 @@ function _parseHsuSheets(hsu_sheets) {
   hsu_sheets.forEach((sheet) => {
     // _printSheet(sheet)
     if (!sheet.values || sheet.values.length < 1) {
-      console.log(`no value in sheet: ${sheet}`)
+      console.log(`no value in sheet: ${sheet.range}`)
     }
     else if (sheet.range === HSULYMPICS_SPREADSHEET_SHEETS.Players) {
       data['Players'] = _parseHsuPlayers(sheet)
@@ -139,7 +139,7 @@ function _parseHsuSheets(hsu_sheets) {
     }
   });
 
-  console.log(`Parsed google sheets data: ${JSON.stringify(data)}`)
+  console.log(`Parsed google sheets data.`)
   return data
 }
 
@@ -175,23 +175,23 @@ async function loadAllSheets(parse = true) {
  * 
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
-async function loadSheet(auth, sheet_name_str, range_str) {
-  const sheets = google.sheets({ version: 'v4', auth });
-  const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: HSULYMPICS_SPREADSHEET_ID,
-    range: `'${sheet_name_str}'!${range_str}`,
-  });
+// async function loadSheet(auth, sheet_name_str, range_str) {
+//   const sheets = google.sheets({ version: 'v4', auth });
+//   const res = await sheets.spreadsheets.values.get({
+//     spreadsheetId: HSULYMPICS_SPREADSHEET_ID,
+//     range: `'${sheet_name_str}'!${range_str}`,
+//   });
 
-  const rows = res.data.values;
-  if (!rows || rows.length === 0) {
-    console.log('No data found.');
-    return;
-  }
-  console.log(`\nSheet: ${sheet_name_str}\n`)
-  rows.forEach((row) => {
-    console.log(`${row}`);
-  });
-}
+//   const rows = res.data.values;
+//   if (!rows || rows.length === 0) {
+//     console.log('No data found.');
+//     return;
+//   }
+//   console.log(`\nSheet: ${sheet_name_str}\n`)
+//   rows.forEach((row) => {
+//     console.log(`${row}`);
+//   });
+// }
 
 export default defineEventHandler(async (event) => {
   console.log("entering sheet.js")
