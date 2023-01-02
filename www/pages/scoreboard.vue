@@ -1,6 +1,23 @@
 <template>
-  <section>
-    <div class="container mx-auto">
+  <section class="container mx-auto space-y-2">
+    <!-- Headline -->
+    <div class="flex justify-between my-4">
+      <div class="flex flex-col space-y-2">
+        <div :class="headlineTextClass">Scoreboard</div>
+        <div :class="headlineRefreshClass">Last Updated: {{ lastUpdated }}</div>
+      </div>
+      <div class="flex flex-col space-2">
+        <div :class="headlineButtonClass">
+        <!-- <div :class="headlineButtonClass" @click="refresh()"> -->
+          Reload Data (disabled)
+        </div>
+        <div :class="headlineButtonClass">
+          Rotate Table
+        </div>
+      </div>
+    </div>
+    <!-- Scoreboard Table -->
+    <div class="flex">
       <div v-if="pending">Loading...</div>
       <div v-else class="text-white">
         <!-- <div>
@@ -41,7 +58,26 @@ useHead({
   title: "Scoreboard",
 });
 
-const { pending, data: sheets } = useLazyFetch("/api/sheets");
+const { pending, data: sheets, refresh } = useLazyFetch("/api/sheets");
+
+const rotateTable = useState('rotateTable', () => false);
+const lastUpdated = useState('lastUpdated', () => "on page load");
+
+const tableClass = "table-auto border-collapse border border-slate-500 mt-8 bg-black";
+
+const tableHeaderBaseClass = `md:text-xl text-base p-3`;
+const tableHeaderTeamClass = `${tableHeaderBaseClass}`;
+const tableHeaderGameClass = `${tableHeaderBaseClass} text-yellow-400`;
+const tableHeaderTotalClass = `${tableHeaderBaseClass} text-red-500`;
+
+const tableRowBaseClass = `p-1 border border-slate-500 `;
+const tableRowTeamClass = `${tableRowBaseClass} p-3`;
+const tableRowGameClass = `${tableRowBaseClass}`;
+const tableRowTotalClass = `${tableRowBaseClass} text-right pr-3`;
+
+const headlineTextClass = "text-4xl md:text-7xl text-white";
+const headlineRefreshClass = "text-sm md:text-base text-white";
+const headlineButtonClass = "flex p-3 m-auto text-white bg-red-700 hover:bg-yellow-400";
 
 function computeTotalScore(game_scores_sheet, team_index) {
   let score = 0
@@ -71,17 +107,5 @@ function activeGameScores(game_scores_sheet) {
   }
   return active_scores
 }
-
-const tableClass = "table-auto border-collapse border border-slate-500 mt-8"
-
-const tableHeaderBaseClass = `md:text-xl text-base p-3`;
-const tableHeaderTeamClass = `${tableHeaderBaseClass}`;
-const tableHeaderGameClass = `${tableHeaderBaseClass} text-yellow-400`;
-const tableHeaderTotalClass = `${tableHeaderBaseClass} text-red-500`;
-
-const tableRowBaseClass = `p-1 border border-slate-500 `;
-const tableRowTeamClass = `${tableRowBaseClass} p-3`;
-const tableRowGameClass = `${tableRowBaseClass}`;
-const tableRowTotalClass = `${tableRowBaseClass} text-right pr-3`;
 
 </script>
