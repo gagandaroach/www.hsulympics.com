@@ -3,12 +3,12 @@
   <div class="flex flex-col bg-black min-h-screen min-w-screen">
     <div :class="headerClass">
       <div class="flex flex-col space-y-1">
-        <NuxtLink to="/" :class="headerTitleClass">{{ webpageMainTitle }}</NuxtLink>
+        <NuxtLink to="/" :class="headerTitleClass" :active-class="headerTitleActiveClass">The Hsulympics Website</NuxtLink>
         <NuxtLink to="https://www.daroach.net" target="_blank" :class="headerPlugClass" >powered by daroach.net</NuxtLink>
       </div>
       <div class="flex space-x-2">
         <div>
-          <NuxtLink to="/dashboard" :class="buttonClass" :active-class="buttonActiveClass">Scoreboard</NuxtLink>
+          <NuxtLink to="/scoreboard" :class="buttonClass" :active-class="buttonActiveClass">Scoreboard</NuxtLink>
         </div>
         <div>
           <NuxtLink to="/teams" :class="buttonClass" :active-class="buttonActiveClass">Teams</NuxtLink>
@@ -35,12 +35,13 @@ useHead({
 });
 
 
-const headerClass = "flex justify-between bg-red-700 text-white md:p-3 p-1";
+const headerClass = "flex justify-between bg-red-900 text-white md:p-3 p-1";
 const headerTitleClass = "md:text-4xl text-base";
-const headerPlugClass = "md:text-sm text-xs";
-const buttonCommonClass = "flex text-center md:text-lg text-sm";
-const buttonClass = `${buttonCommonClass} bg-red-800 my-2 self-center p-3 hover:bg-red-600`;
-const buttonActiveClass = `${buttonCommonClass} bg-red-600`;
+const headerPlugClass = "md:text-sm text-xs text-red-500";
+const headerTitleActiveClass = ""
+const buttonCommonClass = "flex text-center md:text-lg text-sm border-2 border-solid border-red-900 hover:border-yellow-400";
+const buttonClass = `${buttonCommonClass} bg-red-700 my-2 self-center p-3`;
+const buttonActiveClass = `${buttonCommonClass} text-black border-yellow-400 bg-yellow-400`;
 
 </script>
 
