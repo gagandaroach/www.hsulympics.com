@@ -1,18 +1,39 @@
 <!-- https://nuxt.com/docs/getting-started/views#layouts -->
 <template>
-  <div class="flex flex-col bg-gray-50 h-screen justify-between">
-    <AppHeader />
+  <div class="flex flex-col bg-black min-h-screen justify-between">
+    <div class="flex p-3 justify-center bg-red-700 text-white">
+      <p class="text-2xl">{{ title }}</p>
+    </div>
     <slot />
-    <AppFooter />
+    <div class="flex p-5 justify-center">
+      <div :class="buttonClass">
+        <NuxtLink to="/teams">Teams</NuxtLink>
+      </div>
+      <div :class="buttonClassBig">
+        <NuxtLink to="/dashboard">Scores</NuxtLink>
+      </div>
+      <div :class="buttonClass">
+        <NuxtLink to="/games">Games</NuxtLink>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const webpageMainTitle = "Hsulympics 2022"
+const title = useState('title', () => webpageMainTitle)
+
 useHead({
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk} - Hsulympics 2022` : "Hsulympics 2022";
+    const newTitle = titleChunk ? `${titleChunk} - ${webpageMainTitle}` : webpageMainTitle
+    console.log(newTitle);
+    title.value = newTitle;
+    return newTitle;
   },
 });
+const appConfig = useAppConfig();
+const buttonClass = "flex p-3 rounded-xl m-3 " + appConfig.theme.colors.primary;
+const buttonClassBig = "flex p-5 rounded-xl " + appConfig.theme.colors.primary;
 </script>
 
 <style>
