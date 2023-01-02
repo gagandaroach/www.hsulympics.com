@@ -1,39 +1,44 @@
 <!-- https://nuxt.com/docs/getting-started/views#layouts -->
 <template>
   <div class="flex flex-col bg-black min-h-screen justify-between">
-    <div class="flex p-3 justify-center bg-red-700 text-white">
-      <p class="text-2xl">{{ title }}</p>
+    <div :class="headerClass">
+      <div class="flex flex-col space-y-1">
+        <p class="text-4xl">{{ webpageMainTitle }}</p>
+        <p class="text-sm text-gray-100" >website powered by daroach.net</p>
+      </div>
+      <div class="flex space-x-2">
+        <div>
+          <NuxtLink to="/dashboard" :class="buttonClass" :active-class="buttonActiveClass">Scoreboard</NuxtLink>
+        </div>
+        <div>
+          <NuxtLink to="/teams" :class="buttonClass" :active-class="buttonActiveClass">Teams</NuxtLink>
+        </div>
+        <div>
+          <NuxtLink to="/games" :class="buttonClass" :active-class="buttonActiveClass">Games</NuxtLink>
+        </div>
+      </div>
     </div>
     <slot />
-    <div class="flex p-5 justify-center">
-      <div :class="buttonClass">
-        <NuxtLink to="/teams">Teams</NuxtLink>
-      </div>
-      <div :class="buttonClassBig">
-        <NuxtLink to="/dashboard">Scores</NuxtLink>
-      </div>
-      <div :class="buttonClass">
-        <NuxtLink to="/games">Games</NuxtLink>
-      </div>
-    </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const webpageMainTitle = "Hsulympics 2022"
-const title = useState('title', () => webpageMainTitle)
-
+const localTitleChunk = useState('title', () => webpageMainTitle)
 useHead({
   titleTemplate: (titleChunk) => {
     const newTitle = titleChunk ? `${titleChunk} - ${webpageMainTitle}` : webpageMainTitle
     console.log(newTitle);
-    title.value = newTitle;
+    localTitleChunk.value = titleChunk ? `${webpageMainTitle} - ${titleChunk}` : webpageMainTitle;
     return newTitle;
   },
 });
+
 const appConfig = useAppConfig();
-const buttonClass = "flex p-3 rounded-xl m-3 " + appConfig.theme.colors.primary;
-const buttonClassBig = "flex p-5 rounded-xl " + appConfig.theme.colors.primary;
+const headerClass = "flex justify-center bg-red-700 text-white justify-between p-3";
+const buttonCommonClass = "flex text-lg text-center";
+const buttonClass = `${buttonCommonClass} bg-red-800 my-2 self-center p-3 hover:bg-red-600`;
+const buttonActiveClass = `${buttonCommonClass} bg-red-600`;
 </script>
 
 <style>
