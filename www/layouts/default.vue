@@ -4,7 +4,9 @@
     <div :class="headerClass">
       <div class="flex flex-col space-y-1">
         <NuxtLink to="/" :class="headerTitleClass" :active-class="headerTitleActiveClass">The Hsulympics Website</NuxtLink>
-        <NuxtLink to="https://www.daroach.net" target="_blank" :class="headerPlugClass" >powered by daroach.net</NuxtLink>
+        <p :class="headerPlugClass">
+          powered by <NuxtLink to="https://www.daroach.net" target="_blank" :class="headerPlugClass">daroach.net</NuxtLink>
+        </p>
       </div>
       <div class="flex space-x-2">
         <div>
