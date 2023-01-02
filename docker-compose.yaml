@@ -14,11 +14,8 @@ services:
   webserver:
     build: ./www
     restart: unless-stopped
-    ports:
-      - 20000:3000
     environment:
-      - VIRTUAL_HOST=hsulympics.com
+      - VIRTUAL_HOST=www.hsulympics.com
       - VIRTUAL_PORT=3000
-      - LETSENCRYPT_HOST=hsulympics.com
+      - LETSENCRYPT_HOST=www.hsulympics.com
       - LETSENCRYPT_EMAIL=gagandaroach@gmail.com
-    command: "npm run start"
