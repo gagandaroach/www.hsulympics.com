@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     postcss: {
@@ -11,13 +13,12 @@ export default defineNuxtConfig({
 
     // https://nuxt.com/docs/getting-started/configuration#environment-variables-and-private-tokens
     runtimeConfig: {
-        // The private keys which are only available server-side
-        apiSecret: '123',
-        // Keys within public are also exposed client-side
+        GOOGLE_API_KEY: fs.readFileSync('google-api-key.txt', 'utf-8'),
+        HSULYMPICS_SPREADSHEET_ID: fs.readFileSync('google-api-hsu-sheets-id.txt', 'utf-8'),
         public: { apiBase: '/api' }
     },
 
-    //
+    // 
     app: {
         pageTransition:
         {
