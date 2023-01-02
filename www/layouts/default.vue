@@ -1,10 +1,10 @@
 <!-- https://nuxt.com/docs/getting-started/views#layouts -->
 <template>
-  <div class="flex flex-col bg-black min-h-screen justify-between">
+  <div class="flex flex-col bg-black min-h-screen min-w-screen justify-between">
     <div :class="headerClass">
       <div class="flex flex-col space-y-1">
-        <p class="text-4xl">{{ webpageMainTitle }}</p>
-        <p class="text-sm text-gray-100" >website powered by daroach.net</p>
+        <p :class="headerTitleClass">{{ webpageMainTitle }}</p>
+        <p :class="headerPlugClass" >powered by daroach.net</p>
       </div>
       <div class="flex space-x-2">
         <div>
@@ -34,11 +34,14 @@ useHead({
   },
 });
 
-const appConfig = useAppConfig();
-const headerClass = "flex justify-center bg-red-700 text-white justify-between p-3";
-const buttonCommonClass = "flex text-lg text-center";
+
+const headerClass = "flex justify-center bg-red-700 text-white justify-between md:p-3 p-1";
+const headerTitleClass = "md:text-4xl text-base";
+const headerPlugClass = "md:text-sm text-xs";
+const buttonCommonClass = "flex text-center md:text-lg text-sm";
 const buttonClass = `${buttonCommonClass} bg-red-800 my-2 self-center p-3 hover:bg-red-600`;
 const buttonActiveClass = `${buttonCommonClass} bg-red-600`;
+
 </script>
 
 <style>
