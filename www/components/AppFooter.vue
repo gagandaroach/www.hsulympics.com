@@ -9,7 +9,7 @@ const buttonClassBig = "flex p-5 rounded-xl " + appConfig.theme.colors.primary;
       <NuxtLink to="/teams">Teams</NuxtLink>
     </div>
     <div :class="buttonClassBig">
-      <NuxtLink to="/dashboard">Dashboard</NuxtLink>
+      <NuxtLink to="/dashboard">Scores</NuxtLink>
     </div>
     <div :class="buttonClass">
       <NuxtLink to="/games">Games</NuxtLink>
