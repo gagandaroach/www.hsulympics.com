@@ -7,6 +7,7 @@
           <p>Objective: {{ game.obj }}</p>
           <p>_id: {{ game.id }}</p>
           <p>_show: {{ game.show }}</p>
+          <p>_dump: {{ game }}</p>
         </div>
       </div>
       <div v-else>

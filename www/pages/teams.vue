@@ -6,6 +6,7 @@
           <h1 class="text-xl mb-2">{{team.name}}</h1>
           <p>Players: {{ team.members }}</p>
           <p>_id: {{ team.id }}</p>
+          <p>_dump: {{ team }}</p>
         </div>
       </div>
       <div v-else>
