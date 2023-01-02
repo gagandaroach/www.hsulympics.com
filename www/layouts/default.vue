@@ -3,8 +3,8 @@
   <div class="flex flex-col bg-black min-h-screen min-w-screen justify-between">
     <div :class="headerClass">
       <div class="flex flex-col space-y-1">
-        <p :class="headerTitleClass">{{ webpageMainTitle }}</p>
-        <p :class="headerPlugClass" >powered by daroach.net</p>
+        <NuxtLink to="/" :class="headerTitleClass">{{ webpageMainTitle }}</NuxtLink>
+        <NuxtLink to="https://www.daroach.net" target="_blank" :class="headerPlugClass" >powered by daroach.net</NuxtLink>
       </div>
       <div class="flex space-x-2">
         <div>
