@@ -7,12 +7,13 @@
         <div :class="headlineRefreshClass">Last Updated: {{ lastUpdated }}</div>
       </div>
       <div class="flex flex-col space-2">
-        <div :class="headlineButtonClass">
-        <!-- <div :class="headlineButtonClass" @click="refresh()"> -->
-          Reload Data (disabled)
+        <!-- <div :class="headlineButtonClass">
+          Reload Data (disabled) -->
+        <div :class="headlineButtonClass" @click="refresh()">
+          Reload Data
         </div>
         <div :class="headlineButtonClass">
-          Rotate Table
+          Rotate Table (TODO)
         </div>
       </div>
     </div>
@@ -20,9 +21,7 @@
     <div class="flex">
       <div v-if="pending">Loading...</div>
       <div v-else class="text-white">
-        <!-- <div>
-          Test: {{ activeGameScores(sheets['Scores']) }}
-        </div> -->
+
         <table :class="tableClass">
           <thead>
             <tr>
@@ -48,6 +47,23 @@
             </tr>
           </tbody>
         </table>
+
+        <div class="mt-16">
+          <div class="text-xl">Team Placement Stats: </div>
+          <div>will use these computed props to dynamically color table</div>
+          <div>
+          team placement : {{ winningTeamIndexes(sheets['Scores']) }}
+          </div>
+          <div>
+          team 1 in first? : {{ isInFirst(sheets['Scores'], 0) }}
+          </div>
+          <div>
+          team 2 in second? : {{ isInSecond(sheets['Scores'], 1) }}
+          </div>
+          <div>
+          team 4 in second? : {{ isInSecond(sheets['Scores'], 3) }}
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -61,16 +77,20 @@ useHead({
 const { pending, data: sheets, refresh } = useLazyFetch("/api/sheets");
 
 const rotateTable = useState('rotateTable', () => false);
-const lastUpdated = useState('lastUpdated', () => "on page load");
+const lastUpdated = useState('lastUpdated', () => new Date().toUTCString());
+
+watch(sheets, (newSheets) => {
+  lastUpdated.value = new Date().toUTCString();
+});
 
 const tableClass = "table-auto border-collapse border border-slate-500 mt-8 bg-black";
 
-const tableHeaderBaseClass = `md:text-xl text-base p-3`;
+const tableHeaderBaseClass = `md:text-2xl text-base p-3`;
 const tableHeaderTeamClass = `${tableHeaderBaseClass}`;
 const tableHeaderGameClass = `${tableHeaderBaseClass} text-yellow-400`;
 const tableHeaderTotalClass = `${tableHeaderBaseClass} text-red-500`;
 
-const tableRowBaseClass = `p-1 border border-slate-500 `;
+const tableRowBaseClass = `p-1 text-xl text-center border border-slate-500 `;
 const tableRowTeamClass = `${tableRowBaseClass} p-3`;
 const tableRowGameClass = `${tableRowBaseClass}`;
 const tableRowTotalClass = `${tableRowBaseClass} text-right pr-3`;
@@ -106,6 +126,63 @@ function activeGameScores(game_scores_sheet) {
     }
   }
   return active_scores
+}
+
+function isInSecond(game_scores_sheet, team_index) {
+  return winningTeamIndexes(game_scores_sheet)['second'].includes(team_index)
+}
+
+function isInFirst(game_scores_sheet, team_index) {
+  return winningTeamIndexes(game_scores_sheet)['first'].includes(team_index)
+}
+
+function winningTeamIndexes(game_scores_sheet) {
+  let num_teams = null
+  
+  // Get Num Teams from the first game score's length
+  for (const game in game_scores_sheet) {
+    if (Object.hasOwnProperty.call(game_scores_sheet, game)) {
+      const game_score = game_scores_sheet[game];
+      if (num_teams === null)
+      {
+        num_teams = game_score.scores.length;
+        break;
+      }
+    }
+  }
+  
+  // Compute all Scores
+  let scores = [];
+  let max = 0;
+  let secondMax = 0;
+  for (let index = 0; index < num_teams; index++) {
+    const score = computeTotalScore(game_scores_sheet, index)
+    scores.push(score);
+    if (score > max) {
+      max = score;
+    } 
+    if (score < max && score > secondMax) {
+      secondMax = score;
+    }
+  }
+  
+  // Get Max Score IDx
+  let max_idx = []
+  let second_idx = []
+  for (let index = 0; index < num_teams; index++) {
+    if (scores[index] === max) {
+      max_idx.push(index);
+    }
+    if (scores[index] === secondMax)
+    {
+      second_idx.push(index);
+    }
+  }
+
+  return {
+    first: max_idx,
+    second: second_idx
+  }
 }
 
 </script>

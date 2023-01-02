@@ -196,6 +196,7 @@ async function loadAllSheets(parse = true) {
 export default defineEventHandler(async (event) => {
   console.log('server/api/sheets/index.js ~ calling google sheets...');
   const sheets = await loadAllSheets();
+  // console.log(JSON.stringify(sheets));
   console.log('server/api/sheets/index.js ~ sheets loaded.')
   return sheets
 })

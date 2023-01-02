@@ -1,0 +1,397 @@
+{
+    "Scores": {
+        "1": {
+            "id": "1",
+            "scores": [
+                "10",
+                "5",
+                "3",
+                "1",
+                "5"
+            ],
+            "show": "TRUE"
+        },
+        "2": {
+            "id": "2",
+            "scores": [
+                "9",
+                "7",
+                "2",
+                "1",
+                "7"
+            ],
+            "show": "TRUE"
+        },
+        "3": {
+            "id": "3",
+            "scores": [
+                "8",
+                "12",
+                "3",
+                "3",
+                "12"
+            ],
+            "show": "TRUE"
+        },
+        "4": {
+            "id": "4",
+            "scores": [
+                "8",
+                "3",
+                "3",
+                "0",
+                "3"
+            ],
+            "show": "TRUE"
+        },
+        "5": {
+            "id": "5",
+            "scores": [
+                "5",
+                "6",
+                "1",
+                "1",
+                "6"
+            ],
+            "show": "TRUE"
+        },
+        "6": {
+            "id": "6",
+            "scores": [
+                "5",
+                "9",
+                "4",
+                "4",
+                "4"
+            ],
+            "show": "TRUE"
+        },
+        "7": {
+            "id": "7",
+            "scores": [
+                "7",
+                "5",
+                "5",
+                "5",
+                "5"
+            ],
+            "show": "FALSE"
+        },
+        "8": {
+            "id": "8",
+            "scores": [
+                "12",
+                "2",
+                "6",
+                "6",
+                "6"
+            ],
+            "show": "FALSE"
+        },
+        "9": {
+            "id": "9",
+            "scores": [
+                "3",
+                "3",
+                "4",
+                "5",
+                "4"
+            ],
+            "show": "FALSE"
+        },
+        "10": {
+            "id": "10",
+            "scores": [
+                "6",
+                "12",
+                "3",
+                "6",
+                "4"
+            ],
+            "show": "FALSE"
+        }
+    },
+    "Teams": {
+        "GaganFans": {
+            "id": "1",
+            "name": "GaganFans",
+            "members": "Tia Liza, Tio Barry, Isa, Alyssa, Cassie"
+        },
+        "Cassie": {
+            "id": "2",
+            "name": "Cassie",
+            "members": "Tia Liza, Tio Barry, Isa, Alyssa, Cassie"
+        },
+        "asdfasdf": {
+            "id": "3",
+            "name": "asdfasdf",
+            "members": "Tia Liza, Tio Barry, Isa, Alyssa, Cassie"
+        },
+        "jskdf": {
+            "id": "4",
+            "name": "jskdf",
+            "members": "Tia Liza, Tio Barry, Isa, Alyssa, Cassie"
+        },
+        "kjasdf": {
+            "id": "5",
+            "name": "kjasdf",
+            "members": "Tia Liza, Tio Barry, Isa, Alyssa, Cassie"
+        }
+    },
+    "Games": {
+        "1": {
+            "id": "1",
+            "name": "BallPass 1",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "2": {
+            "id": "2",
+            "name": "BallPass 2",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "3": {
+            "id": "3",
+            "name": "BallPass 3",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "4": {
+            "id": "4",
+            "name": "BallPass 4",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "5": {
+            "id": "5",
+            "name": "BallPass 5",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "6": {
+            "id": "6",
+            "name": "BallPass 6",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "7": {
+            "id": "7",
+            "name": "BallPass 7",
+            "show": "FALSE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "8": {
+            "id": "8",
+            "name": "BallPass 8",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "9": {
+            "id": "9",
+            "name": "BallPass 9",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        },
+        "10": {
+            "id": "10",
+            "name": "BallPass 10",
+            "show": "TRUE",
+            "obj": "To pass the ball through the hoop",
+            "rules": "Each ball to pass through the hoop gains a point. Team with highest number of points wins. ",
+            "format": "One team, one person at a time",
+            "scoring": "1st place: 10 points\n2nd place: 9 points\netc"
+        }
+    },
+    "Players": {
+        "Kung Kung": {
+            "name": "Kung Kung",
+            "team": "1",
+            "zodiac": "Horse",
+            "password": "KK0"
+        },
+        "Hao Bu": {
+            "name": "Hao Bu",
+            "team": "2",
+            "zodiac": "Boar",
+            "password": "HB0"
+        },
+        "Tia Mare": {
+            "name": "Tia Mare",
+            "team": "3",
+            "zodiac": "Ox",
+            "password": "Mare1"
+        },
+        "Tio Barry": {
+            "name": "Tio Barry",
+            "team": "4",
+            "zodiac": "Ox",
+            "password": "Barry2"
+        },
+        "Cassie": {
+            "name": "Cassie",
+            "team": "5",
+            "zodiac": "Dog",
+            "password": "Cassie3"
+        },
+        "JP": {
+            "name": "JP",
+            "team": "1",
+            "zodiac": "Rat",
+            "password": "JP4"
+        },
+        "Sonia": {
+            "name": "Sonia",
+            "team": "2",
+            "zodiac": "Tiger",
+            "password": "Sonia5"
+        },
+        "Tia Liza": {
+            "name": "Tia Liza",
+            "team": "3",
+            "zodiac": "Tiger",
+            "password": "Liza6"
+        },
+        "Tio Jim": {
+            "name": "Tio Jim",
+            "team": "4",
+            "zodiac": "Rabbit",
+            "password": "Jim7"
+        },
+        "Isa": {
+            "name": "Isa",
+            "team": "5",
+            "zodiac": "Rat",
+            "password": "Isa8"
+        },
+        "Liana": {
+            "name": "Liana",
+            "team": "1",
+            "zodiac": "Rabbit",
+            "password": "Liana9"
+        },
+        "Harrison": {
+            "name": "Harrison",
+            "team": "2",
+            "zodiac": "Rabbit",
+            "password": "Harrison10"
+        },
+        "Adri": {
+            "name": "Adri",
+            "team": "3",
+            "zodiac": "Horse",
+            "password": "Adri11"
+        },
+        "Tio John": {
+            "name": "Tio John",
+            "team": "4",
+            "zodiac": "Rabbit",
+            "password": "John12"
+        },
+        "Tia Pris": {
+            "name": "Tia Pris",
+            "team": "5",
+            "zodiac": "Dragon",
+            "password": "Pris13"
+        },
+        "Chan": {
+            "name": "Chan",
+            "team": "1",
+            "zodiac": "Rat",
+            "password": "Chan14"
+        },
+        "Ming": {
+            "name": "Ming",
+            "team": "2",
+            "zodiac": "Tiger",
+            "password": "Ming15"
+        },
+        "June": {
+            "name": "June",
+            "team": "3",
+            "zodiac": "Horse",
+            "password": "June16"
+        },
+        "Tio Marco": {
+            "name": "Tio Marco",
+            "team": "4",
+            "zodiac": "Snake",
+            "password": "Mark17"
+        },
+        "Tia Mee": {
+            "name": "Tia Mee",
+            "team": "5",
+            "zodiac": "Rooster",
+            "password": "Mee18"
+        },
+        "Bianca": {
+            "name": "Bianca",
+            "team": "1",
+            "zodiac": "Monkey",
+            "password": "Bianca19"
+        },
+        "Lorenzo": {
+            "name": "Lorenzo",
+            "team": "2",
+            "zodiac": "Rooster",
+            "password": "Lorenzo20"
+        },
+        "Tio Quito": {
+            "name": "Tio Quito",
+            "team": "3",
+            "zodiac": "Snake",
+            "password": "Quito21"
+        },
+        "Tia Kati": {
+            "name": "Tia Kati",
+            "team": "4",
+            "zodiac": "Dog",
+            "password": "Kati22"
+        },
+        "Tio Andrew": {
+            "name": "Tio Andrew",
+            "team": "5",
+            "zodiac": "Rooster",
+            "password": "Andrew23"
+        },
+        "Alex": {
+            "name": "Alex",
+            "team": "1",
+            "zodiac": "Dragon",
+            "password": "Alex24"
+        },
+        "Alyssa": {
+            "name": "Alyssa",
+            "team": "2",
+            "zodiac": "Horse",
+            "password": "Alyssa25"
+        }
+    }
+}
