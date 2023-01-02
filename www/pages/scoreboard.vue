@@ -89,7 +89,7 @@ watch(sheets, (newSheets) => {
 
 const { pause, resume, isActive } = useIntervalFn(() => {
   refresh();
-}, 3000);
+}, 5000);
 
 const tableClass = "table-auto border-collapse border border-slate-500 mt-8 bg-black";
 
@@ -100,7 +100,7 @@ const tableHeaderTotalClass = `${tableHeaderBaseClass} text-red-500`;
 
 const tableRowBaseClass = `p-1 text-xl text-center border border-slate-500 `;
 const tableRowTeamClass = `${tableRowBaseClass} p-3`;
-const tableRowGameClass = `${tableRowBaseClass}`;
+const tableRowGameClass = `${tableRowBaseClass} hover:bg-red-900`;
 const tableRowTotalClass = `${tableRowBaseClass} text-right pr-3`;
 
 const headlineTextClass = "text-4xl md:text-7xl text-white";
