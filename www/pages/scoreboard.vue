@@ -19,7 +19,7 @@
     </div>
     <!-- Scoreboard Table -->
     <div class="flex">
-      <div v-if="pending">Loading...</div>
+      <div v-if="pending && firstLoad">Loading...</div>
       <div v-else class="text-white">
 
         <table :class="tableClass">
@@ -70,6 +70,8 @@
 </template>
 
 <script setup>
+import { useIntervalFn } from '@vueuse/core' // VueUse helper, install it
+
 useHead({
   title: "Scoreboard",
 });
@@ -78,10 +80,16 @@ const { pending, data: sheets, refresh } = useLazyFetch("/api/sheets");
 
 const rotateTable = useState('rotateTable', () => false);
 const lastUpdated = useState('lastUpdated', () => new Date().toUTCString());
+const firstLoad = useState('firstLoad', () => true);
 
 watch(sheets, (newSheets) => {
   lastUpdated.value = new Date().toUTCString();
+  firstLoad.value = false;
 });
+
+const { pause, resume, isActive } = useIntervalFn(() => {
+  refresh();
+}, 5000);
 
 const tableClass = "table-auto border-collapse border border-slate-500 mt-8 bg-black";
 
