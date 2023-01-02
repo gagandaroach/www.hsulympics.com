@@ -196,10 +196,7 @@ async function loadAllSheets(parse = true) {
 export default defineEventHandler(async (event) => {
   console.log("entering sheet.js")
 
-  var sheets = await loadAllSheets()
+  const sheets = await loadAllSheets()
 
-  return {
-    api: 'v0',
-    data: sheets
-  }
+  return sheets
 })
