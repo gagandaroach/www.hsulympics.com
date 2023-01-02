@@ -6,15 +6,15 @@
         <div :class="headlineTextClass">Scoreboard</div>
         <div :class="headlineRefreshClass">Last Updated: {{ lastUpdated }}</div>
       </div>
-      <div class="flex flex-col space-2">
+      <div class="flex flex-col space-y-2 space-x-2">
         <!-- <div :class="headlineButtonClass">
           Reload Data (disabled) -->
-        <div :class="headlineButtonClass" @click="refresh()">
+        <!-- <div :class="headlineButtonClass" @click="refresh()">
           Reload Data
-        </div>
-        <div :class="headlineButtonClass">
+        </div> -->
+        <!-- <div :class="headlineButtonClass">
           Rotate Table (TODO)
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- Scoreboard Table -->
@@ -89,7 +89,7 @@ watch(sheets, (newSheets) => {
 
 const { pause, resume, isActive } = useIntervalFn(() => {
   refresh();
-}, 5000);
+}, 3000);
 
 const tableClass = "table-auto border-collapse border border-slate-500 mt-8 bg-black";
 
@@ -105,7 +105,7 @@ const tableRowTotalClass = `${tableRowBaseClass} text-right pr-3`;
 
 const headlineTextClass = "text-4xl md:text-7xl text-white";
 const headlineRefreshClass = "text-sm md:text-base text-white";
-const headlineButtonClass = "flex p-3 m-auto text-white bg-red-700 hover:bg-yellow-400";
+const headlineButtonClass = "flex p-3 m-auto text-white bg-red-700 hover:bg-yellow-400 mr-2";
 
 function computeTotalScore(game_scores_sheet, team_index) {
   let score = 0
