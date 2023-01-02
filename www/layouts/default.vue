@@ -1,6 +1,6 @@
 <!-- https://nuxt.com/docs/getting-started/views#layouts -->
 <template>
-  <div class="flex flex-col bg-black min-h-screen min-w-screen justify-between">
+  <div class="flex flex-col bg-black min-h-screen min-w-screen">
     <div :class="headerClass">
       <div class="flex flex-col space-y-1">
         <NuxtLink to="/" :class="headerTitleClass">{{ webpageMainTitle }}</NuxtLink>
@@ -35,7 +35,7 @@ useHead({
 });
 
 
-const headerClass = "flex justify-center bg-red-700 text-white justify-between md:p-3 p-1";
+const headerClass = "flex justify-between bg-red-700 text-white md:p-3 p-1";
 const headerTitleClass = "md:text-4xl text-base";
 const headerPlugClass = "md:text-sm text-xs";
 const buttonCommonClass = "flex text-center md:text-lg text-sm";
