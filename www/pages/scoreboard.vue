@@ -3,12 +3,15 @@
     <div class="container mx-auto">
       <div v-if="pending">Loading...</div>
       <div v-else class="text-white">
+        <!-- <div>
+          Test: {{ activeGameScores(sheets['Scores']) }}
+        </div> -->
         <table :class="tableClass">
           <thead>
             <tr>
               <th :class="tableHeaderTeamClass">Team</th>
-              <th v-for="(score, index) in sheets['Scores']" :key="index" :class="tableHeaderGameClass">
-                <div v-if="score.show === 'TRUE'">Game {{ score.id }}</div>
+              <th v-for="(score, index) in activeGameScores(sheets['Scores'])" :key="index" :class="tableHeaderGameClass">
+                Game {{ score.id }}
               </th>
               <th :class="tableHeaderTotalClass">Total Score</th>
             </tr>
@@ -16,10 +19,11 @@
           <tbody>
             <tr v-for="(team, index) in sheets['Teams']" :key="index">
               <td  :class="tableRowTeamClass">{{ team.name }}</td>
-              <td v-for="(score, index2) in sheets['Scores']" :key="index2" :class="tableRowGameClass">
-                <div v-if="score.show === 'TRUE'">
+              <td v-for="(score, index2) in activeGameScores(sheets['Scores'])" :key="index2" :class="tableRowGameClass">
+                  <!-- Debug Sanity Check -->
+                  <!-- team: {{team.id - 1 }}, game: {{ score.id }}, score: {{ score.scores[team.id - 1] }} -->
+                  <!-- Single Score Display -->
                   {{ score.scores[team.id - 1] }}
-                </div>
               </td>
               <td  :class="tableRowTotalClass">
                 {{ computeTotalScore(sheets['Scores'], team.id - 1) }}
@@ -52,6 +56,20 @@ function computeTotalScore(game_scores_sheet, team_index) {
     }
   }
   return score
+}
+
+function activeGameScores(game_scores_sheet) {
+  let active_scores = {}
+  for (const game in game_scores_sheet) {
+    if (Object.hasOwnProperty.call(game_scores_sheet, game)) {
+      const game_score = game_scores_sheet[game];
+      if (game_score.show === 'TRUE')
+      {
+        active_scores[game] = game_score
+      }
+    }
+  }
+  return active_scores
 }
 
 const tableClass = "table-auto border-collapse border border-slate-500 mt-8"
