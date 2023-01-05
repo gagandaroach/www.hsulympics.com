@@ -19,3 +19,12 @@ services:
       - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=www.hsulympics.com
       - LETSENCRYPT_EMAIL=gagandaroach@gmail.com
+
+  redirect:
+    image: morbz/docker-web-redirect
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=hsulympics.com
+      - REDIRECT_TARGET=www.hsulympics.com
+      - LETSENCRYPT_HOST=www.hsulympics.com
+      - VIRTUAL_PORT=80
