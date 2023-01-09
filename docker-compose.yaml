@@ -26,5 +26,5 @@ services:
     environment:
       - VIRTUAL_HOST=hsulympics.com
       - REDIRECT_TARGET=www.hsulympics.com
-      - LETSENCRYPT_HOST=www.hsulympics.com
+      - LETSENCRYPT_HOST=hsulympics.com
       - VIRTUAL_PORT=80
