@@ -1,8 +1,20 @@
 <template>
-  <div class="container m-auto text-white space-y-2">
-    <h1 class="text-4xl">Hsulympics Main Landing Page</h1>
-    <p>This page will be filled with some assests / pictures detailing this specific Hsulympics, information about Hsulympics of the past, information about what it means to be a Hsu, etc...</p>
-    <p>Hsulympics 2022 Team working on content.</p>
-    <p>For now, check out the links in the navbar above.</p>
+  <div class="container flex-col m-auto text-white text-center">
+
+    <div>
+      <img :src="HsuChar" alt="" :class="hsuCharClass">
+    </div>
+
+    <h1 class="text-4xl my-3">Hsulympics VI</h1>
+    <p class="text-base">January 28, 2023</p>
+    <!-- <p class="text-base">San Mateo, CA</p> -->
+
   </div>
 </template>
+
+<script setup>
+import HsuChar from "assets/svgs/hsuCharacter.svg";
+
+const hsuCharClass = "w-64 h-64 m-auto";
+
+</script>
