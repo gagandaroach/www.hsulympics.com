@@ -61,7 +61,7 @@ const headerClass = "flex justify-between text-white md:p-3 p-1";
 const headerTitleClass = "flex md:text-4xl text-base";
 const headerPlugClass = "md:text-base text-xs tracking-widest";
 const headerTitleActiveClass = ""
-const buttonCommonClass = "flex text-center md:text-lg text-xs md:p-3 p-1 hover:border-yellow-400";
+const buttonCommonClass = "flex text-center md:text-lg text-xs md:p-3 p-1";
 const buttonClass = `${buttonCommonClass} my-2 self-center`;
 const buttonActiveClass = `${buttonCommonClass} text-red-600`;
 </script>
