@@ -1,6 +1,12 @@
 <template>
   <section>
-    <div class="">
+    <div>
+
+      <div v-if="hideGames">
+        
+      </div>
+
+    <div v-else class="">
       <div v-if="!pending" v-for="(game, index) in sheets['Games']" :key="index">
         <div v-if="game.show === 'TRUE'" class="container flex flex-col text-white bg-black border-2 border-solid border-red-900 rounded-lg m-3 mx-auto p-3">
           <h1 class="text-2xl text-yellow-400 mb-2">{{game.name}}</h1>
@@ -19,6 +25,8 @@
         Loading...
       </div>
     </div>
+      
+    </div>
   </section>
 </template>
 
@@ -27,4 +35,5 @@
     title: "Games"
   });
   const { pending, data: sheets } = useLazyFetch('/api/sheets')
+  const hideGames = true;
 </script>
