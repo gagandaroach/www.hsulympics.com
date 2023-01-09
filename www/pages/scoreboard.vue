@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto space-y-2">
+  <section class="container mx-auto space-y-2 hidden">
     <!-- Headline -->
     <div class="flex justify-between my-4">
       <div class="flex flex-col space-y-2">
