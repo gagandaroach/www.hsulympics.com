@@ -1,6 +1,6 @@
 <template>
   <div class="container flex-col m-auto my-14 md:my-20 text-white text-center">
-    <div class="w-36 h-36 m-auto mb-6">
+    <div v-if="!pending" class="w-36 h-36 m-auto mb-6">
       <img :src="HsuChar" alt="" :class="hsuCharClass">
     </div>
 
@@ -25,7 +25,7 @@
           </div>
         </div>
 
-        <div v-else>Loading...</div>
+        <!-- <div v-else>Loading...</div> -->
       </div>
       <!-- <p class="text-base "> {{team.bio}} </p> -->
       <!-- <div ></div> -->
