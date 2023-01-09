@@ -51,6 +51,9 @@ useHead({
     localTitleChunk.value = titleChunk ? `${webpageMainTitle} - ${titleChunk}` : webpageMainTitle;
     return newTitle;
   },
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+ ]
 });
 
 
