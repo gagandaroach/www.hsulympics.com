@@ -6,13 +6,8 @@
 
         <div class="flex flex-col">
           <div class="flex flex-row">
-
-            <div class="flex bg-black mr-1 md:h-10 h-6">
-              <img :src="HsuChar" alt="">
-            </div>
-            
+            <img :src="HsuChar" alt="" class="flex bg-black mr-1 md:h-10 h-6" />
             <NuxtLink to="/" :class="headerTitleClass" :active-class="headerTitleActiveClass">Hsulympics VI</NuxtLink>
-
           </div>
 
           <div class="flex flex-col space-y-1">
@@ -60,11 +55,11 @@ useHead({
 
 
 const headerClass = "flex justify-between text-white md:p-3 p-1";
-const headerTitleClass = "md:text-4xl text-base";
+const headerTitleClass = "flex md:text-4xl text-base";
 const headerPlugClass = "md:text-base text-xs tracking-widest";
 const headerTitleActiveClass = ""
-const buttonCommonClass = "flex text-center md:text-lg text-sm  hover:border-yellow-400";
-const buttonClass = `${buttonCommonClass} my-2 self-center p-3`;
+const buttonCommonClass = "flex text-center md:text-lg text-xs md:p-3 p-1 hover:border-yellow-400";
+const buttonClass = `${buttonCommonClass} my-2 self-center`;
 const buttonActiveClass = `${buttonCommonClass} text-red-600`;
 </script>
 
