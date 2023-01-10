@@ -9,7 +9,11 @@ module.exports = {
     "./app.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'hsu-purp': '#c131d6'
+      }
+    },
   },
   plugins: [],
   safelist: [
