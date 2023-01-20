@@ -9,11 +9,21 @@
     <div class="flex flex-row m-10">
       <CountDown end="January 28, 2023" />
     </div>
+    <div>
+      test store
+      <div>
+        {{  hsuStore.loaded }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import HsuChar from "assets/svgs/hsuCharacter.svg";
+import { useHsuDataStore } from "~/stores/hsuData";
+
+const hsuStore = useHsuDataStore()
+hsuStore.refreshSheets()
 
 const hsuCharClass = "w-64 h-64 m-auto";
 
