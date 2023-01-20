@@ -42,7 +42,7 @@
 <script setup>
 import HsuChar from "assets/svgs/hsuCharacter.svg";
 
-const webpageMainTitle = "Hsulympics 2022"
+const webpageMainTitle = "Hsulympics"
 const localTitleChunk = useState('title', () => webpageMainTitle)
 useHead({
   titleTemplate: (titleChunk) => {
