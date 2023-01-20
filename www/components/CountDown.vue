@@ -87,7 +87,7 @@ export default {
   },
   watch: {
     now(value) {
-      this.diff = this.date - this.now;
+      this.diff = 1674925200 - this.now;
       if (this.diff <= 0 || this.stop) {
         this.diff = 0;
         // Remove interval
