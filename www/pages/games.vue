@@ -2,9 +2,11 @@
   <section>
     <div>
 
-      <div v-if="hideGames">
-        
+    <div v-if="hideGames" class="container flex flex-col text-hsu-red tracking-wide md:text-lg text-xs mx-auto mt-60 text-center">
+      <div>
+        wouldn't hs-you like to know : )
       </div>
+    </div>
 
     <div v-else class="">
       <div v-if="!pending" v-for="(game, index) in sheets['Games']" :key="index">

@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'hsu-purp': '#c131d6'
+        'hsu-purp': '#c131d6',
+        'hsu-red': '#CF161C'
       }
     },
   },

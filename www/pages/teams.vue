@@ -4,15 +4,25 @@
       <img :src="HsuChar" alt="" :class="hsuCharClass">
     </div>
 
+    <div class="mb-10 text-2xl text-white">
+      <div class="text-xl">
+        Honorable VIPs
+      </div>
+      <div>
+        Kung Kung & Hao Bu
+      </div>
+    </div>
+
     <div class="flex flex-row text-center text-white">
       <div class="flex flex-col md:flex-row mx-auto space-y-14 md:space-x-14 md:space-y-0">
+        <!-- Teams -->
         <div
           v-if="!pending"
           v-for="(team, index) in sheets['Teams']"
           :key="index"
         >
           <div class="flex flex-col">
-            <h1 class="text-3xl mb-2 text-red-600">{{ team.name }}</h1>
+            <h1 class="text-3xl mb-2 text-hsu-red">{{ team.name }}</h1>
             <div
               v-for="(player, index) in teamPlayers(sheets, team.id)"
               :key="index"
@@ -24,7 +34,6 @@
             </div>
           </div>
         </div>
-
         <!-- <div v-else>Loading...</div> -->
       </div>
       <!-- <p class="text-base "> {{team.bio}} </p> -->
@@ -32,6 +41,7 @@
       <!-- <p>_id: {{ team.id }}</p> -->
       <!-- <p>_dump: {{ team }}</p> -->
     </div>
+
   </div>
 </template>
 

@@ -23,13 +23,13 @@
   
       <div class="flex space-x-2">
         <div>
-          <NuxtLink to="/scoreboard" :class="buttonClass" :active-class="buttonActiveClass">Scoreboard</NuxtLink>
-        </div>
-        <div>
           <NuxtLink to="/teams" :class="buttonClass" :active-class="buttonActiveClass">Teams</NuxtLink>
         </div>
         <div>
           <NuxtLink to="/games" :class="buttonClass" :active-class="buttonActiveClass">Games</NuxtLink>
+        </div>
+        <div>
+          <NuxtLink to="/scoreboard" :class="buttonClass" :active-class="buttonActiveClass">Scoreboard</NuxtLink>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@ const headerPlugClass = "md:text-base text-xs tracking-widest";
 const headerTitleActiveClass = ""
 const buttonCommonClass = "flex text-center md:text-lg text-xs md:p-3 p-1";
 const buttonClass = `${buttonCommonClass} my-2 self-center`;
-const buttonActiveClass = `${buttonCommonClass} text-red-600`;
+const buttonActiveClass = `${buttonCommonClass} text-hsu-red`;
 </script>
 
 <style>
