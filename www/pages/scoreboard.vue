@@ -95,7 +95,9 @@ const hideScoreboard = true;
 const rotateTable = useState("rotateTable", () => false);
 
 const { pause, resume, isActive } = useIntervalFn(() => {
-  hsuStore.refreshSheets()
+  if (!hideScoreboard) {
+    hsuStore.refreshSheets()
+  }
 }, 5000);
 
 const tableClass =
