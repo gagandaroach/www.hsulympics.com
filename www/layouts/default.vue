@@ -69,7 +69,7 @@ const buttonActiveClass = `${buttonCommonClass} text-hsu-red`;
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.25s;
+  transition: all 0.20s;
 }
 .page-enter-from,
 .page-leave-to {

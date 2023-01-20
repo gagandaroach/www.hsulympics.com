@@ -9,7 +9,7 @@
     </div>
 
     <div v-else class="">
-      <div v-if="!pending" v-for="(game, index) in sheets['Games']" :key="index">
+      <div v-if="hsuStore.loaded" v-for="(game, index) in hsuStore.games" :key="index">
         <div v-if="game.show === 'TRUE'" class="container flex flex-col text-white bg-black border-2 border-solid border-red-900 rounded-lg m-3 mx-auto p-3">
           <h1 class="text-2xl text-yellow-400 mb-2">{{game.name}}</h1>
           <p class="text-base text-red-400">Objective</p>
@@ -23,7 +23,7 @@
           <!-- <p>_dump: {{ game }}</p> -->
         </div>
       </div>
-      <div v-else>
+      <div v-else class="text-white text-center">
         Loading...
       </div>
     </div>
@@ -33,9 +33,17 @@
 </template>
 
 <script setup>
+  import { useHsuDataStore } from "~/stores/hsuData";
+
+  const hsuStore = useHsuDataStore()
+  if (!hsuStore.loaded) {
+    hsuStore.refreshSheets()
+  };
+
   useHead({
     title: "Games"
   });
-  const { pending, data: sheets } = useLazyFetch('/api/sheets')
-  const hideGames = true;
+  
+  const hideGames = false;
+  
 </script>

@@ -9,7 +9,7 @@
         <div class="flex flex-col space-y-2">
           <div :class="headlineTextClass">Scoreboard</div>
           <div :class="headlineRefreshClass">
-            Last Updated: {{ lastUpdated }}
+            Last Updated: {{ hsuStore.lastUpdated }}
           </div>
         </div>
         <div class="flex flex-col space-y-2 space-x-2">
@@ -25,14 +25,14 @@
       </div>
       <!-- Scoreboard Table -->
       <div class="flex">
-        <div v-if="pending && firstLoad">Loading...</div>
+        <div v-if="!hsuStore.loaded" class="text-white text-center">Loading...</div>
         <div v-else class="text-white">
           <table :class="tableClass">
             <thead>
               <tr>
                 <th :class="tableHeaderTeamClass">Team</th>
                 <th
-                  v-for="(score, index) in activeGameScores(sheets['Scores'])"
+                  v-for="(score, index) in activeGameScores(hsuStore.scores)"
                   :key="index"
                   :class="tableHeaderGameClass"
                 >
@@ -42,10 +42,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(team, index) in sheets['Teams']" :key="index">
+              <tr v-for="(team, index) in hsuStore.teams" :key="index">
                 <td :class="tableRowTeamClass">{{ team.name }}</td>
                 <td
-                  v-for="(score, index2) in activeGameScores(sheets['Scores'])"
+                  v-for="(score, index2) in activeGameScores(hsuStore.scores)"
                   :key="index2"
                   :class="tableRowGameClass"
                 >
@@ -55,7 +55,7 @@
                   {{ score.scores[team.id - 1] }}
                 </td>
                 <td :class="tableRowTotalClass">
-                  {{ computeTotalScore(sheets["Scores"], team.id - 1) }}
+                  {{ computeTotalScore(hsuStore.scores, team.id - 1) }}
                 </td>
               </tr>
             </tbody>
@@ -65,11 +65,11 @@
             <div class="text-xl">Team Placement Stats:</div>
             <div>will use these computed props to dynamically color table</div>
             <div>
-              team placement : {{ winningTeamIndexes(sheets["Scores"]) }}
+              team placement : {{ winningTeamIndexes(hsuStore.scores) }}
             </div>
-            <div>team 1 in first? : {{ isInFirst(sheets["Scores"], 0) }}</div>
-            <div>team 2 in second? : {{ isInSecond(sheets["Scores"], 1) }}</div>
-            <div>team 4 in second? : {{ isInSecond(sheets["Scores"], 3) }}</div>
+            <div>team 1 in first? : {{ isInFirst(hsuStore.scores, 0) }}</div>
+            <div>team 2 in second? : {{ isInSecond(hsuStore.scores, 1) }}</div>
+            <div>team 4 in second? : {{ isInSecond(hsuStore.scores, 3) }}</div>
           </div>
         </div>
       </div>
@@ -79,6 +79,12 @@
 
 <script setup>
 import { useIntervalFn } from "@vueuse/core"; // VueUse helper, install it
+import { useHsuDataStore } from "~/stores/hsuData";
+
+const hsuStore = useHsuDataStore()
+if (!hsuStore.loaded) {
+  hsuStore.refreshSheets()
+};
 
 useHead({
   title: "Scoreboard",
@@ -86,19 +92,10 @@ useHead({
 
 const hideScoreboard = true;
 
-const { pending, data: sheets, refresh } = useLazyFetch("/api/sheets");
-
 const rotateTable = useState("rotateTable", () => false);
-const lastUpdated = useState("lastUpdated", () => new Date().toUTCString());
-const firstLoad = useState("firstLoad", () => true);
-
-watch(sheets, (newSheets) => {
-  lastUpdated.value = new Date().toUTCString();
-  firstLoad.value = false;
-});
 
 const { pause, resume, isActive } = useIntervalFn(() => {
-  refresh();
+  hsuStore.refreshSheets()
 }, 5000);
 
 const tableClass =
