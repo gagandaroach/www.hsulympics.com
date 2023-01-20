@@ -44,6 +44,6 @@
     title: "Games"
   });
   
-  const hideGames = false;
+  const hideGames = true;
   
 </script>
