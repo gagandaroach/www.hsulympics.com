@@ -7,7 +7,7 @@ export const useHsuDataStore = defineStore('hsuStore', {
         games: [],
         players: [],
         scores: [],
-        lastUpdated: new Date().toUTCString(),
+        lastUpdated: new Date().toLocaleString(),
         // state
         loaded: false,
         loading: false,
@@ -28,7 +28,7 @@ export const useHsuDataStore = defineStore('hsuStore', {
                 this.players = this.sheets['Players']
                 this.scores = this.sheets['Scores']
                 this.loaded = true;
-                this.lastUpdated = new Date().toUTCString();
+                this.lastUpdated = new Date().toLocaleString();
             } catch (error) {
                 this.error = error
                 console.log('hsu store ran into error :(')

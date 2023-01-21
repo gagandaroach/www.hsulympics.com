@@ -1,16 +1,13 @@
 <template>
-  <section class="container mx-auto space-y-2">
+  <section class="mx-auto space-y-2">
     <div v-if="hideScoreboard" class="container flex flex-col text-hsu-red md:text-lg text-xs mx-auto mt-60 text-center">
       coming hs-oon
     </div>
     <div v-else>
       <!-- Headline -->
-      <div class="flex justify-between my-4">
-        <div class="flex flex-col space-y-2">
-          <div :class="headlineTextClass">Scoreboard</div>
-          <div :class="headlineRefreshClass">
-            Last Updated: {{ hsuStore.lastUpdated }}
-          </div>
+      <div class="flex mx-auto">
+        <div class="flex flex-col space-y-2 mx-auto">
+          <!-- <div :class="headlineTextClass">Hsulympics Scoreboard</div> -->
         </div>
         <div class="flex flex-col space-y-2 space-x-2">
           <!-- <div :class="headlineButtonClass">
@@ -26,40 +23,56 @@
       <!-- Scoreboard Table -->
       <div class="flex">
         <div v-if="!hsuStore.loaded" class="text-white text-center">Loading...</div>
-        <div v-else class="text-white">
+        <div v-else class="text-white mx-auto">
           <table :class="tableClass">
             <thead>
               <tr>
-                <th :class="tableHeaderTeamClass">Team</th>
+                <th :class="`${tableHeaderBaseClass} border-b-2`">
+                  <div class="w-32">
+                  
+                  </div>
+              </th>
                 <th
                   v-for="(score, index) in activeGameScores(hsuStore.scores)"
                   :key="index"
-                  :class="tableHeaderGameClass"
+                  :class="`${tableHeaderBaseClass} border-b-2 text-yellow-400`"
                 >
-                  Game {{ score.id }}
+                <div class="flex flex-row">
+                  <div class="w-32 pb-3">
+                    {{  hsuStore.games[score.id].name }}
+                  </div>
+                </div>
                 </th>
-                <th :class="tableHeaderTotalClass">Total Score</th>
+                <th :class="`${tableHeaderBaseClass} text-hsu-red border-b-2`">
+                  <div class="w-32 pb-3">
+                    Total Score
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(team, index) in hsuStore.teams" :key="index">
-                <td :class="tableRowTeamClass">{{ team.name }}</td>
+                <td :class="`${tableRowBaseClass} border-r-2 border-hsu-red`">{{ team.name }}</td>
                 <td
                   v-for="(score, index2) in activeGameScores(hsuStore.scores)"
                   :key="index2"
-                  :class="tableRowGameClass"
+                  :class="`${tableRowBaseClass} text-6xl border-b-2`"
                 >
                   <!-- Debug Sanity Check -->
                   <!-- team: {{team.id - 1 }}, game: {{ score.id }}, score: {{ score.scores[team.id - 1] }} -->
                   <!-- Single Score Display -->
-                  {{ score.scores[team.id - 1] }}
+                  {{ placement_to_score(score.scores[team.id - 1]) }}
                 </td>
-                <td :class="tableRowTotalClass">
-                  {{ computeTotalScore(hsuStore.scores, team.id - 1) }}
+                <td :class="`${tableRowBaseClass} text-right text-7xl border-2 border-hsu-red`">
+                    {{ computeTotalScore(hsuStore.scores, team.id - 1) }}
                 </td>
               </tr>
             </tbody>
           </table>
+
+          <div class="text-sm md:text-base text-white text-end p-1">
+                Last Updated: {{ hsuStore.lastUpdated }}
+          </div>
 
           <div class="mt-16">
             <div class="text-xl">Team Placement Stats:</div>
@@ -86,11 +99,36 @@ if (!hsuStore.loaded) {
   hsuStore.refreshSheets()
 };
 
+const placement_to_score_map = {
+  1: 20,
+  2: 16,
+  3: 13,
+  4: 10,
+  5: 8
+}
+
+function placement_to_score(placement) {
+  switch (placement) {
+    case "1":
+      return placement_to_score_map[placement]
+    case "2":
+      return placement_to_score_map[placement]
+    case "3":
+      return placement_to_score_map[placement]
+    case "4":
+      return placement_to_score_map[placement]
+    case "5":
+      return placement_to_score_map[placement]
+    default:
+      return "--"
+  }
+}
+
 useHead({
   title: "Scoreboard",
 });
 
-const hideScoreboard = true;
+const hideScoreboard = false;
 
 const rotateTable = useState("rotateTable", () => false);
 
@@ -100,23 +138,9 @@ const { pause, resume, isActive } = useIntervalFn(() => {
   }
 }, 5000);
 
-const tableClass =
-  "table-auto border-collapse border border-slate-500 mt-8 bg-black";
-
-const tableHeaderBaseClass = `md:text-2xl text-base p-3`;
-const tableHeaderTeamClass = `${tableHeaderBaseClass}`;
-const tableHeaderGameClass = `${tableHeaderBaseClass} text-yellow-400`;
-const tableHeaderTotalClass = `${tableHeaderBaseClass} text-red-500`;
-
-const tableRowBaseClass = `p-1 text-xl text-center border border-slate-500 `;
-const tableRowTeamClass = `${tableRowBaseClass} p-3`;
-const tableRowGameClass = `${tableRowBaseClass} hover:bg-red-900`;
-const tableRowTotalClass = `${tableRowBaseClass} text-right pr-3`;
-
-const headlineTextClass = "text-4xl md:text-7xl text-white";
-const headlineRefreshClass = "text-sm md:text-base text-white";
-const headlineButtonClass =
-  "flex p-3 m-auto text-white bg-red-700 hover:bg-yellow-400 mr-2";
+const tableClass ="table-auto border-collapse mt-8 bg-black";
+const tableHeaderBaseClass = `md:text-2xl text-base border-hsu-red my-2`;
+const tableRowBaseClass = `text-2xl text-center h-12 border-slate-500 p-2`;
 
 function computeTotalScore(game_scores_sheet, team_index) {
   let score = 0;
@@ -124,10 +148,17 @@ function computeTotalScore(game_scores_sheet, team_index) {
     if (Object.hasOwnProperty.call(game_scores_sheet, game)) {
       const game_score = game_scores_sheet[game];
       if (game_score.show === "TRUE") {
-        const curr_score = parseInt(game_score.scores[team_index]);
-        score += curr_score;
+        const curr_score = game_score.scores[team_index];
+        if (curr_score !== '--')
+        {
+          score += parseInt(placement_to_score(curr_score));
+        }
       }
     }
+  }
+  if (score == 0)
+  {
+    return '--'
   }
   return score;
 }
