@@ -22,6 +22,7 @@ module.exports = {
       pattern: /(bg|text|border)-(red|green|blue|purple|yellow)-(100|200|300|400|500|600|700|800|900)/,
       pattern: /(table)-(auto|fixed)/,
       pattern: /(border)-(collapse|separate)/,
+      pattern: /list-(disc|inside|decimal)/
     },
   ]
 }

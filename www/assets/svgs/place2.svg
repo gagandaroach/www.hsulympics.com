@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 50.800001 50.800001"
+   height="2in"
+   width="2in">
+  <defs
+     id="defs2">
+    <rect
+       id="rect892"
+       height="78.241074"
+       width="103.56548"
+       y="164.79762"
+       x="27.214287" />
+    <rect
+       id="rect1539"
+       height="78.241074"
+       width="103.56548"
+       y="164.79762"
+       x="27.214287" />
+    <rect
+       x="27.214287"
+       y="164.79762"
+       width="103.56548"
+       height="78.241074"
+       id="rect892-5" />
+    <rect
+       x="27.214287"
+       y="164.79762"
+       width="103.56548"
+       height="78.241074"
+       id="rect1542" />
+    <rect
+       id="rect892-3-6"
+       height="78.241074"
+       width="103.56548"
+       y="164.79762"
+       x="27.214287" />
+    <rect
+       id="rect1564"
+       height="78.241074"
+       width="103.56548"
+       y="164.79762"
+       x="27.214287" />
+    <rect
+       x="27.214287"
+       y="164.79762"
+       width="103.56548"
+       height="78.241074"
+       id="rect892-5-6-9" />
+    <rect
+       x="27.214287"
+       y="164.79762"
+       width="103.56548"
+       height="78.241074"
+       id="rect1567" />
+    <linearGradient
+       xlink:href="#linearGradient1315"
+       id="linearGradient1317"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.66773824,0,0,0.66773821,-3.3234233,-0.52654877)"
+       x1="50.937103"
+       y1="24.20809"
+       x2="109.68192"
+       y2="68.803185" />
+    <linearGradient
+       id="linearGradient1315">
+      <stop
+         id="stop1311"
+         offset="0"
+         style="stop-color:#a7a7ad;stop-opacity:1" />
+      <stop
+         id="stop1313"
+         offset="1"
+         style="stop-color:#a7a7ad;stop-opacity:0" />
+    </linearGradient>
+    <rect
+       x="27.214287"
+       y="164.79762"
+       width="103.56548"
+       height="78.241074"
+       id="rect892-3-6-4" />
+    <rect
+       x="27.214287"
+       y="164.79762"
+       width="103.56548"
+       height="78.241074"
+       id="rect931" />
+    <rect
+       id="rect892-5-6-9-6"
+       height="78.241074"
+       width="103.56548"
+       y="164.79762"
+       x="27.214287" />
+    <rect
+       id="rect934"
+       height="78.241074"
+       width="103.56548"
+       y="164.79762"
+       x="27.214287" />
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <g
+       id="g916"
+       transform="matrix(1.0105225,0,0,1.0105225,-0.79255676,0.16381705)">
+      <circle
+         r="22.462637"
+         style="opacity:1;fill:url(#linearGradient1317);fill-opacity:1;stroke:none;stroke-width:0.633685"
+         id="path835-9"
+         cx="25.938618"
+         cy="24.899181" />
+      <text
+         transform="matrix(1.1527734,0,0,1.1527734,-21.157129,-180.95889)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:1.25;font-family:'Futura Hv BT';-inkscape-font-specification:'Futura Hv BT';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect892-3-6-4);fill:#ffffff;"
+         id="text890-4-4"
+         xml:space="preserve"><tspan
+           x="27.214844"
+           y="188.20627"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Futura Hv BT';-inkscape-font-specification:'Futura Hv BT'">2</tspan></tspan></text>
+      <text
+         xml:space="preserve"
+         id="text890-2-5-1"
+         style="font-size:26.4583px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect892-5-6-9-6);fill:#ffffff;"
+         transform="matrix(0.46146695,0,0,0.46146695,14.403553,-64.500425)"><tspan
+           x="27.214844"
+           y="188.93558"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Futura Hv BT';-inkscape-font-specification:'Futura Hv BT'">nd</tspan></tspan></text>
+    </g>
+  </g>
+</svg>

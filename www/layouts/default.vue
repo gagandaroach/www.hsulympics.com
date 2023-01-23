@@ -1,6 +1,6 @@
 <!-- https://nuxt.com/docs/getting-started/views#layouts -->
 <template>
-<div class="flex grow bg-black">
+<div class="">
   <div class="flex flex-col bg-black min-h-screen min-w-screen">
     <div :class="headerClass">
       <div>

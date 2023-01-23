@@ -3,25 +3,9 @@
     <div v-if="hideScoreboard" class="container flex flex-col text-hsu-red md:text-lg text-xs mx-auto mt-60 text-center">
       coming hs-oon
     </div>
-    <div v-else>
-      <!-- Headline -->
-      <div class="flex mx-auto">
-        <div class="flex flex-col space-y-2 mx-auto">
-          <!-- <div :class="headlineTextClass">Hsulympics Scoreboard</div> -->
-        </div>
-        <div class="flex flex-col space-y-2 space-x-2">
-          <!-- <div :class="headlineButtonClass">
-          Reload Data (disabled) -->
-          <!-- <div :class="headlineButtonClass" @click="refresh()">
-          Reload Data
-        </div> -->
-          <!-- <div :class="headlineButtonClass">
-          Rotate Table (TODO)
-        </div> -->
-        </div>
-      </div>
+    <div v-else class="mx-auto">
       <!-- Scoreboard Table -->
-      <div class="flex">
+      <div class="flex mx-auto">
         <div v-if="!hsuStore.loaded" class="text-white text-center">Loading...</div>
         <div v-else class="text-white mx-auto">
           <table :class="tableClass">
@@ -61,7 +45,17 @@
                   <!-- Debug Sanity Check -->
                   <!-- team: {{team.id - 1 }}, game: {{ score.id }}, score: {{ score.scores[team.id - 1] }} -->
                   <!-- Single Score Display -->
-                  {{ placement_to_score(score.scores[team.id - 1]) }}
+                  <div class="flex flex-row grow">
+                    <div v-if="score.scores[team.id - 1] !== '--'" class="w-6 h-6 m-auto absolute">
+                      <!-- {{ score.scores[team.id - 1] }} -->
+                      <img :src="placement_to_trophy_svg(score.scores[team.id - 1])" alt="" class="bg-black">
+                    </div>
+                    <div class="flex mx-auto text-right">
+                      <p>
+                        {{ placement_to_score(score.scores[team.id - 1]) }}
+                      </p>
+                    </div>
+                  </div>
                 </td>
                 <td :class="`${tableRowBaseClass} text-right text-7xl border-2 border-hsu-red`">
                     {{ computeTotalScore(hsuStore.scores, team.id - 1) }}
@@ -94,10 +88,33 @@
 import { useIntervalFn } from "@vueuse/core"; // VueUse helper, install it
 import { useHsuDataStore } from "~/stores/hsuData";
 
+import place1 from "assets/svgs/place1.svg";
+import place2 from "assets/svgs/place2.svg";
+import place3 from "assets/svgs/place3.svg";
+import place4 from "assets/svgs/place4.svg";
+import place5 from "assets/svgs/place5.svg";
+
 const hsuStore = useHsuDataStore()
 if (!hsuStore.loaded) {
   hsuStore.refreshSheets()
 };
+
+function placement_to_trophy_svg(placement) {
+  switch (placement) {
+    case "1":
+      return place1
+    case "2":
+      return place2
+    case "3":
+      return place3
+    case "4":
+      return place4
+    case "5":
+      return place5
+    default:
+      return ""
+  }
+}
 
 const placement_to_score_map = {
   1: 20,
@@ -140,7 +157,7 @@ const { pause, resume, isActive } = useIntervalFn(() => {
 
 const tableClass ="table-auto border-collapse mt-8 bg-black";
 const tableHeaderBaseClass = `md:text-2xl text-base border-hsu-red my-2`;
-const tableRowBaseClass = `text-2xl text-center h-12 border-slate-500 p-2`;
+const tableRowBaseClass = `text-4xl text-center h-12 w-auto border-slate-500 p-2`;
 
 function computeTotalScore(game_scores_sheet, team_index) {
   let score = 0;
