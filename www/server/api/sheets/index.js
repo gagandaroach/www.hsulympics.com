@@ -60,9 +60,11 @@ function _parseHsuGames(sheet) {
       name: row[1],
       show: row[2],
       obj: row[3],
-      rules: row[4],
-      format: row[5],
-      scoring: row[6]
+      format: row[4],
+      order: row[5],
+      rules: row[6],
+      scoring: row[7],
+      img: row[8]
     }
     games[game.id] = game
   }
