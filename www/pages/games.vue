@@ -78,9 +78,48 @@
               </div>
               <!-- <p>{{ game.rules.split('\n') }}</p> -->
             </div>
-            <div>
-              <h2 v-if="game.scoring" class="text-hsu-red">Scoring</h2>
-              <p>{{ game.scoring }}</p>
+            <div v-if="game.scoring">
+              <h2 class="text-hsu-red">Scoring</h2>
+              <div v-for="[index, str] in game.scoring.split('\n').entries()" :key="index">
+                <!-- 0 -->
+                <p class="mt-2" v-if="parseInt(str[0])==0">{{str.substr(1)}}</p>
+                <!-- 1 -->
+                <ul v-if="parseInt(str[0])==1" :class="`list-disc ${class_list}`">
+                  <li>
+                    {{str.substr(1)}}
+                  </li>
+                </ul>
+                <!-- 2 hollow -->
+                <ul v-if="parseInt(str[0])==2" :class="`list-[circle] ${class_list}`">
+                  <ul :class="`list-[circle] ${class_list}`">
+                    <li>
+                      {{str.substr(1)}}
+                    </li>
+                  </ul>
+                </ul>
+                <!-- 3 square -->
+                <ul v-if="parseInt(str[0])==3" :class="`list-[square] ${class_list}`">
+                  <ul :class="`list-[square] ${class_list}`">
+                    <ul :class="`list-[square] ${class_list}`">
+                      <li>
+                        {{str.substr(1)}}
+                      </li>
+                    </ul>
+                  </ul>
+                </ul>
+                <!-- 4 triangle -->
+                <ul v-if="parseInt(str[0])==4" :class="`list-disc ${class_list}`">
+                  <ul :class="`list-disc ${class_list}`">
+                    <ul :class="`list-disc ${class_list}`">
+                      <ul :class="`list-disc ${class_list}`">
+                        <li>
+                          {{str.substr(1)}}
+                        </li>
+                      </ul>
+                    </ul>
+                  </ul>
+                </ul>
+              </div>
             </div>
             <!-- <p>_dump: {{ game }}</p> -->
           </div>
