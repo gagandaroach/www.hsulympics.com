@@ -4,10 +4,10 @@
       coming hs-oon
     </div>
     <div v-else class="mx-auto">
-      <!-- Scoreboard Table -->
       <div class="flex mx-auto">
         <div v-if="!hsuStore.loaded" class="text-white text-center">Loading...</div>
         <div v-else class="text-white mx-auto">
+          <!-- Scoreboard Table -->
           <div class="flex flex-col mr-1">
             <table :class="tableClass">
             <thead>
@@ -68,19 +68,11 @@
           <div class="text-sm md:text-base text-slate-500 text-center p-1">
                 Last Updated: {{ hsuStore.lastUpdated }}
           </div>
-        </div>
-
-
+          </div>
+          <TeamLeadChart/>
+          <!-- Debugging Data -->
           <div class="mt-16">
             <div class="text-xl">Team Placement Stats:</div>
-            <!-- <div>will use these computed props to dynamically color table</div>
-            <div>
-              team placement : {{ winningTeamIndexes(hsuStore.scores) }}
-            </div>
-            <div>team 1 in first? : {{ isInFirst(hsuStore.scores, 0) }}</div>
-            <div>team 2 in second? : {{ isInSecond(hsuStore.scores, 1) }}</div>
-            <div>team 4 in second? : {{ isInSecond(hsuStore.scores, 3) }}</div> -->
-            <!-- <div>teamScoresForGame(0): {{ hsuStore.teamScoresForGame(0) }}</div> -->
             <div>teamPositionsForGame(1): {{ hsuStore.teamPositionsForGame(1) }}</div>
             <div>teamPositionsForGame(2): {{ hsuStore.teamPositionsForGame(2) }}</div>
             <div>teamPositionsForGame(7): {{ hsuStore.teamPositionsForGame(7) }}</div>
@@ -88,6 +80,8 @@
             <div>teamScoresForGame(7): {{ hsuStore.teamScoresForGame(7) }}</div>
             <div>num_teams: {{ hsuStore.num_teams }}</div>
             <div>totalScores(): {{ hsuStore.totalScores() }}</div>
+            <div>activeGameScoresWithScore: {{ hsuStore.activeGameScoresWithScore }}</div>
+            <div>teamTotalScores: {{ hsuStore.teamTotalScores() }}</div>
             <!-- <div>activeGames: {{ hsuStore.activeGames }}</div> -->
             <!-- <div>teams: {{ hsuStore.teams }}</div> -->
             <!-- <div>activeGameScores: {{ hsuStore.activeGameScores }}</div> -->

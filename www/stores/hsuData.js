@@ -46,6 +46,32 @@ export const useHsuDataStore = defineStore('hsuStore', {
             }
             return active;
         },
+        activeGameScoresWithScore(state) {
+            let active = {};
+            // for each game score
+            for (const game_score_id in state.scores) {
+                if (Object.hasOwnProperty.call(state.scores, game_score_id)) {
+                    const game_score = state.scores[game_score_id];
+                    // if showing game score
+                    if (game_score.show === "TRUE") {
+                        const scores = game_score.scores;
+                        let completelyScored = true;
+                        // and each score is a number (well... not a '--')
+                        for (let idx = 0; idx < scores.length; idx++) {
+                            const s = scores[idx];
+                            if (s == '--') {
+                                completelyScored = false;
+                                break;
+                            }
+                        }
+                        if (completelyScored) {
+                            active[game_score_id] = game_score;
+                        }
+                    }
+                }
+            }
+            return active;
+        },
         num_teams(state) {
             if (state.loaded) {
                 return state.scores["1"].scores.length
@@ -181,6 +207,67 @@ export const useHsuDataStore = defineStore('hsuStore', {
             }
 
             return team_scores;
+        },
+        teamTotalScores() {
+            const team_scores = {}
+
+            // init team scores to 
+            //      [game_score_id]:
+            //          [team_id]: total score at this point
+            // { "1": { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 }, "2": { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 }, ... }
+            for (const score_idx in this.activeGameScores) {
+                if (Object.hasOwnProperty.call(this.activeGameScores, score_idx)) {
+                    team_scores[score_idx] = {}
+                    for (let idx = 0; idx < this.num_teams; idx++) {
+                        team_scores[score_idx][idx + 1] = 0;
+                    }
+                }
+            }
+
+            for (const score_idx in this.activeGameScores) {
+                if (Object.hasOwnProperty.call(this.activeGameScores, score_idx)) {
+                    const scores = this.teamScoresForGame(score_idx)
+                    // first score, no summing
+                    if (score_idx === "1") {
+                        team_scores[score_idx] = scores;
+                    }
+                    // 1+, sum plus previous
+                    else {
+                        const prev_score_id = parseInt(score_idx) - 1;
+                        for (let team_idx = 1; team_idx <= this.num_teams; team_idx++) {
+                            const prev_totals = team_scores[prev_score_id];
+                            team_scores[score_idx][team_idx] = prev_totals[team_idx] + scores[team_idx]
+                        }
+                    }
+                }
+            }
+            return team_scores
+            // {
+            // "1": { "1": 20, "2": 14.5, "3": 10, "4": 8, "5": 14.5 },
+            // "2": { "1": 30, "2": 22.5, "3": 26, "4": 28, "5": 27.5 },
+            // "3": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 },
+            // "4": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 },
+            // "5": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 },
+            // "6": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 },
+            // "7": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 },
+            // "8": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 },
+            // "9": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 }, 
+            // "10": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 } 
+            // }
+        },
+        teamPlacmentHistory() {
+            
+        },
+        getTeamById(team_id) {
+            for (const team_name in this.teams) {
+                if (Object.hasOwnProperty.call(this.teams, team_name)) {
+                    const team = this.teams[team_name];
+                    if (team.id == team_id) {
+                        return team;
+                    }
+                }
+            }
+            return {};
         }
-    }
+    },
 })

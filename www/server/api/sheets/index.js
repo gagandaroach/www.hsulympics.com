@@ -99,7 +99,7 @@ function _parseHsuTeams(sheet) {
     var team = {
       id: row[0],
       name: row[1],
-      bio: row[4]
+      color: row[2]
     }
     teams[team.name] = team
   }
