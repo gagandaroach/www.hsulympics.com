@@ -14,7 +14,7 @@
             class="flex flex-col text-white mx-auto mt-6 md:mx-36 mb-12 text-base md:text-xl space-y-2 p-1 md:p-0">
             <div class="border-slate-500 border p-4">
               <div>
-                <p class="text-sm md:text-base text-slate-500 text-start md:absolute p-1">Game {{ game.id }}</p>
+                <p class="text-sm md:text-base text-slate-500 text-start lg:absolute p-1">Game {{ game.id }}</p>
                 <h1 class="text-6xl text-hsu-red mb-6 text-center">
                   {{ game.name }}
                 </h1>
@@ -24,20 +24,20 @@
                 <table class="table-auto border-collapse w-full h-auto bg-black">
                   <thead>
                     <tr class="text-hsu-red">
-                      <th v-if="game.order" class="p-1 border-solid border-slate-500 border w-1/3">Objective</th>
-                      <th v-if="game.order" class="p-1 border-solid border-slate-500 border w-1/3">Format</th>
-                      <th v-if="game.order" class="p-1 border-solid border-slate-500 border w-1/3">Team Order</th>
-                      <th v-if="!game.order" class="p-1 border-solid border-slate-500 border w-1/2">Objective</th>
-                      <th v-if="!game.order" class="p-1 border-solid border-slate-500 border w-1/2">Format</th>
+                      <th v-if="game.order" class="p-1 w-1/3">Objective</th>
+                      <th v-if="game.order" class="p-1 w-1/3">Format</th>
+                      <th v-if="game.order" class="p-1 w-1/3">Team Order</th>
+                      <th v-if="!game.order" class="p-1 w-1/2">Objective</th>
+                      <th v-if="!game.order" class="p-1 w-1/2">Format</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="py-3">
-                      <td v-if="game.order" class="p-1 border-solid border-slate-500 border text-justify align-top px-4 w-1/3">{{ game.obj }}</td>
-                      <td v-if="game.order" class="p-1 border-solid border-slate-500 border text-justify align-top px-4 w-1/3">{{ game.format }}</td>
-                      <td v-if="game.order" class="p-1 border-solid border-slate-500 border text-justify align-top px-4 w-1/3">{{ game.order }}</td>
-                      <td v-if="!game.order" class="p-1 border-solid border-slate-500 border text-justify align-top px-4 w-1/2">{{ game.obj }}</td>
-                      <td v-if="!game.order" class="p-1 border-solid border-slate-500 border text-justify align-top px-4 w-1/2">{{ game.format }}</td>
+                      <td v-if="game.order" class="p-1 text-justify align-top px-4 w-1/3">{{ game.obj }}</td>
+                      <td v-if="game.order" class="p-1 text-justify align-top px-4 w-1/3">{{ game.format }}</td>
+                      <td v-if="game.order" class="p-1 text-justify align-top px-4 w-1/3">{{ game.order }}</td>
+                      <td v-if="!game.order" class="p-1 text-justify align-top px-4 w-1/2">{{ game.obj }}</td>
+                      <td v-if="!game.order" class="p-1 text-justify align-top px-4 w-1/2">{{ game.format }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -62,9 +62,9 @@
             <div>
               <h2 class="text-hsu-red">Rules</h2>
               <!-- Image -->
-              <img :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details" class="aspect-auto h-96 w-auto md:float-right m-2 md:m-6" onerror='this.style.display = "none"' />
+              <img :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details" class="aspect-auto h-96 md:h-[50rem] w-auto md:float-right m-2 md:m-6" onerror='this.style.display = "none"' />
               <!-- Rules Section -->
-              <div v-for="[index, rule_str] in game.rules.split('\n').entries()" :key="index">
+              <div v-for="[index, rule_str] in game.rules.split('\n').entries()" :key="index" class="">
                 <!-- 0 -->
                 <p class="mt-2" v-if="parseInt(rule_str[0]) == 0">{{ rule_str.substr(1) }}</p>
                 <!-- 1 -->
