@@ -45,6 +45,13 @@ export const useHsuDataStore = defineStore('hsuStore', {
                 }
             }
             return active;
+        },
+        num_teams(state) {
+            if (state.loaded) {
+                return state.scores["1"].scores.length
+            } else {
+                return 0;
+            }
         }
     },
     actions: {
@@ -118,7 +125,7 @@ export const useHsuDataStore = defineStore('hsuStore', {
             // so return 0 for all teams
             if (team_placements.length == 0)
             {
-                console.log(`game ${game_idx} has -- score, returning 0 for all teams.`)
+                // console.log(`game ${game_idx} has -- score, returning 0 for all teams.`)
                 return team_scores;
             }
 
@@ -144,7 +151,7 @@ export const useHsuDataStore = defineStore('hsuStore', {
                     }
                     const tie_score = total_tie_score / num_tied_teams;
 
-                    for (let team_tied_idx = 0; team_tied_idx <= num_tied_teams; team_tied_idx++)
+                    for (let team_tied_idx = 0; team_tied_idx < num_tied_teams; team_tied_idx++)
                     {
                         const team_id = team_placements[place][team_tied_idx];
                         team_scores[team_id] = tie_score;
@@ -152,6 +159,28 @@ export const useHsuDataStore = defineStore('hsuStore', {
                 }
             }
             return team_scores
+        },
+        totalScores() {
+            const team_scores = {}
+            for (let idx = 0; idx < this.num_teams; idx++) {
+                team_scores[idx + 1] = 0;
+            }
+
+            for (const score_idx in this.activeGameScores) {
+                if (Object.hasOwnProperty.call(this.activeGameScores, score_idx)) {
+                    const score = this.activeGameScores[score_idx];
+                    const game_team_scores = this.teamScoresForGame(score.id);
+                    for (const team_id in game_team_scores) {
+                        if (Object.hasOwnProperty.call(game_team_scores, team_id)) {
+                            if (team_id != undefined) {
+                                team_scores[team_id] += game_team_scores[team_id];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return team_scores;
         }
     }
 })

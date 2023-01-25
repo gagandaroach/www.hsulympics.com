@@ -60,7 +60,7 @@
                   </div>
                 </td>
                 <td :class="`${tableRowBaseClass} text-right text-7xl border-2 border-hsu-red`">
-                    {{ computeTotalScore(hsuStore.scores, team.id - 1) }}
+                    {{ hsuStore.totalScores()[team.id] }}
                 </td>
               </tr>
             </tbody>
@@ -86,6 +86,8 @@
             <div>teamPositionsForGame(7): {{ hsuStore.teamPositionsForGame(7) }}</div>
             <div>teamScoresForGame(1): {{ hsuStore.teamScoresForGame(1) }}</div>
             <div>teamScoresForGame(7): {{ hsuStore.teamScoresForGame(7) }}</div>
+            <div>num_teams: {{ hsuStore.num_teams }}</div>
+            <div>totalScores(): {{ hsuStore.totalScores() }}</div>
             <!-- <div>activeGames: {{ hsuStore.activeGames }}</div> -->
             <!-- <div>teams: {{ hsuStore.teams }}</div> -->
             <!-- <div>activeGameScores: {{ hsuStore.activeGameScores }}</div> -->
@@ -127,27 +129,6 @@ const { pause, resume, isActive } = useIntervalFn(() => {
   }
 }, 50000);
 
-function computeTotalScore(game_scores_sheet, team_index) {
-  let score = 0;
-  for (const game in game_scores_sheet) {
-    if (Object.hasOwnProperty.call(game_scores_sheet, game)) {
-      const game_score = game_scores_sheet[game];
-      if (game_score.show === "TRUE") {
-        const curr_score = game_score.scores[team_index];
-        if (curr_score !== '--')
-        {
-          score += parseInt(placement_to_score(curr_score));
-        }
-      }
-    }
-  }
-  if (score == 0)
-  {
-    return '--'
-  }
-  return score;
-}
-
 function placement_to_trophy_svg(placement) {
   switch (placement) {
     case "1":
@@ -162,31 +143,6 @@ function placement_to_trophy_svg(placement) {
       return place5
     default:
       return ""
-  }
-}
-
-const placement_to_score_map = {
-  1: 20,
-  2: 16,
-  3: 13,
-  4: 10,
-  5: 8
-}
-
-function placement_to_score(placement) {
-  switch (placement) {
-    case "1":
-      return placement_to_score_map[placement]
-    case "2":
-      return placement_to_score_map[placement]
-    case "3":
-      return placement_to_score_map[placement]
-    case "4":
-      return placement_to_score_map[placement]
-    case "5":
-      return placement_to_score_map[placement]
-    default:
-      return "--"
   }
 }
 </script>
