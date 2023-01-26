@@ -1,9 +1,8 @@
 <template>
-    <div class="flex flex-col m-auto bg-stone-900 m-8 h-96">
-        <div class="text-4xl text-white text-center">
-            Team Leads
+    <div class="flex flex-col px-8 pb-20 h-96">
+        <div class="text-4xl text-white text-center mb-8">
+            Team Rank
         </div>
-        <!-- <Line id="my-chart-id" :options="options" :data="data" /> -->
         <Line id="my-chart-id" :options="options" :data="chartData()" />
     </div>
 </template>
@@ -105,12 +104,20 @@ const options = {
             ticks: {
                 stepSize: 1
             },
-            reverse: true
+            reverse: true,
+            title: {
+                display: true,
+                text: 'Place'
+            }
         },
         x: {
             border: {
                 color: 'white'
             },
+            title: {
+                display: true,
+                text: 'Game'
+            }
         }
     }
 }
