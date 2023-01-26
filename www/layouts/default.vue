@@ -49,7 +49,6 @@ const localTitleChunk = useState('title', () => webpageMainTitle)
 useHead({
   titleTemplate: (titleChunk) => {
     const newTitle = titleChunk ? `${titleChunk} - ${webpageMainTitle}` : webpageMainTitle
-    console.log(newTitle);
     localTitleChunk.value = titleChunk ? `${webpageMainTitle} - ${titleChunk}` : webpageMainTitle;
     return newTitle;
   },

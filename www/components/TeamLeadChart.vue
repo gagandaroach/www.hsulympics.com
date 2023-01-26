@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col px-8 pb-20 h-96">
+    <div class="flex flex-col px-8 pb-20 h-[30rem]">
         <div class="text-4xl text-white text-center mb-8">
             Team Rank
         </div>
@@ -18,8 +18,6 @@ const hsuStore = useHsuDataStore()
 if (!hsuStore.loaded) {
     hsuStore.refreshSheets()
 };
-
-const chartXAxis = "";
 
 function chartData() {
     const labels = []
@@ -71,13 +69,6 @@ function chartData() {
 
         datasets.push(dataset);
     }
-
-    console.log('labels')
-    console.log(labels)
-    console.log('datasets')
-    console.log(datasets)
-
-
     return {
         labels: labels,
         datasets: datasets

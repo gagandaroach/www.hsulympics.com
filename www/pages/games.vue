@@ -62,7 +62,9 @@
             <div class="px-4">
               <h2 class="text-hsu-red">Rules</h2>
               <!-- Image -->
-              <img v-if="game.img" :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details" class="aspect-auto h-96 md:h-[30rem] xl:h-[52rem] w-auto md:float-right m-2 md:m-6 mx-auto" onerror='this.style.display = "none"' />
+              <img v-if="game.img" :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details"
+                class="aspect-auto h-96 md:h-[30rem] xl:h-[35rem] w-auto md:float-right m-2 md:m-6 mx-auto"
+                onerror='this.style.display = "none"' />
               <!-- Rules Section -->
               <div v-for="[index, rule_str] in game.rules.split('\n').entries()" :key="index" class="">
                 <!-- 0 -->
@@ -105,48 +107,48 @@
                 </ul>
               </div>
               <!-- <p>{{ game.rules.split('\n') }}</p> -->
-            </div>
-            <div v-if="game.scoring" class="px-4">
-              <h2 class="text-hsu-red">Scoring</h2>
-              <div v-for="[index, str] in game.scoring.split('\n').entries()" :key="index">
-                <!-- 0 -->
-                <p class="mt-2" v-if="parseInt(str[0]) == 0">{{ str.substr(1) }}</p>
-                <!-- 1 -->
-                <ul v-if="parseInt(str[0]) == 1" :class="`list-disc ${class_list}`">
-                  <li>
-                    {{ str.substr(1) }}
-                  </li>
-                </ul>
-                <!-- 2 hollow -->
-                <ul v-if="parseInt(str[0]) == 2" :class="`list-[circle] ${class_list}`">
-                  <ul :class="`list-[circle] ${class_list}`">
+              <div v-if="game.scoring" class="">
+                <h2 class="text-hsu-red">Scoring</h2>
+                <div v-for="[index, str] in game.scoring.split('\n').entries()" :key="index">
+                  <!-- 0 -->
+                  <p class="mt-2" v-if="parseInt(str[0]) == 0">{{ str.substr(1) }}</p>
+                  <!-- 1 -->
+                  <ul v-if="parseInt(str[0]) == 1" :class="`list-disc ${class_list}`">
                     <li>
                       {{ str.substr(1) }}
                     </li>
                   </ul>
-                </ul>
-                <!-- 3 square -->
-                <ul v-if="parseInt(str[0]) == 3" :class="`list-[square] ${class_list}`">
-                  <ul :class="`list-[square] ${class_list}`">
-                    <ul :class="`list-[square] ${class_list}`">
+                  <!-- 2 hollow -->
+                  <ul v-if="parseInt(str[0]) == 2" :class="`list-[circle] ${class_list}`">
+                    <ul :class="`list-[circle] ${class_list}`">
                       <li>
                         {{ str.substr(1) }}
                       </li>
                     </ul>
                   </ul>
-                </ul>
-                <!-- 4 triangle -->
-                <ul v-if="parseInt(str[0]) == 4" :class="`list-disc ${class_list}`">
-                  <ul :class="`list-disc ${class_list}`">
-                    <ul :class="`list-disc ${class_list}`">
-                      <ul :class="`list-disc ${class_list}`">
+                  <!-- 3 square -->
+                  <ul v-if="parseInt(str[0]) == 3" :class="`list-[square] ${class_list}`">
+                    <ul :class="`list-[square] ${class_list}`">
+                      <ul :class="`list-[square] ${class_list}`">
                         <li>
                           {{ str.substr(1) }}
                         </li>
                       </ul>
                     </ul>
                   </ul>
-                </ul>
+                  <!-- 4 triangle -->
+                  <ul v-if="parseInt(str[0]) == 4" :class="`list-disc ${class_list}`">
+                    <ul :class="`list-disc ${class_list}`">
+                      <ul :class="`list-disc ${class_list}`">
+                        <ul :class="`list-disc ${class_list}`">
+                          <li>
+                            {{ str.substr(1) }}
+                          </li>
+                        </ul>
+                      </ul>
+                    </ul>
+                  </ul>
+                </div>
               </div>
             </div>
             <!-- <p>_dump: {{ game }}</p> -->

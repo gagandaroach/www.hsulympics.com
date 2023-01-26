@@ -6,9 +6,8 @@
     <div v-else class="mx-auto">
       <div class="m-auto">
         <div v-if="!hsuStore.loaded" class="text-white text-center">Loading...</div>
-        <div v-else class="text-white mx-auto">
-          <!-- Scoreboard Table -->
-          <div class="flex flex-col">
+        <div v-else class="flex flex-col text-white m-auto">
+            <!-- Scoreboard Table -->
             <table :class="tableClass">
               <thead>
                 <tr>
@@ -36,7 +35,7 @@
                 <tr v-for="(team, index) in hsuStore.teams" :key="index">
                   <td :class="`${tableRowBaseClass} border-r-2 border-hsu-red`">{{ team.name }}</td>
                   <td v-for="(score, index2) in hsuStore.activeGameScores" :key="index2"
-                    :class="`${tableRowBaseClass} text-6xl border-b-2`">
+                    :class="`${tableRowBaseClass} text-5xl border-b-2`">
                     <!-- Debug Sanity Check -->
                     <!-- team: {{team.id - 1 }}, game: {{ score.id }}, score: {{ score.scores[team.id - 1] }} -->
                     <!-- Single Score Display -->
@@ -53,31 +52,19 @@
                       </div>
                     </div>
                   </td>
-                  <td :class="`${tableRowBaseClass} text-right text-7xl border-2 border-hsu-red`">
+                  <td :class="`${tableRowBaseClass} text-center text-7xl border-2 border-hsu-red`">
                     {{ hsuStore.totalScores()[team.id] }}
                   </td>
                 </tr>
               </tbody>
             </table>
             <!-- Last Updated Line -->
-            <div class="text-sm md:text-base text-slate-500 text-end p-1">
+            <div class="flex flex-row ml-auto text-sm md:text-base text-slate-500 text-right p-1">
               Last Updated: {{ hsuStore.lastUpdated }}
             </div>
-            <TeamLeadChart />
-          </div>
-          <!-- Debugging Data -->
-          <!-- <div class="mt-16">
-            <div class="text-xl">Team Placement Stats:</div>
-            <div>teamPositionsForGame(1): {{ hsuStore.teamPositionsForGame(1) }}</div>
-            <div>teamPositionsForGame(2): {{ hsuStore.teamPositionsForGame(2) }}</div>
-            <div>teamPositionsForGame(7): {{ hsuStore.teamPositionsForGame(7) }}</div>
-            <div>teamScoresForGame(1): {{ hsuStore.teamScoresForGame(1) }}</div>
-            <div>teamScoresForGame(7): {{ hsuStore.teamScoresForGame(7) }}</div>
-            <div>num_teams: {{ hsuStore.num_teams }}</div>
-            <div>totalScores(): {{ hsuStore.totalScores() }}</div>
-            <div>activeGameScoresWithScore: {{ hsuStore.activeGameScoresWithScore }}</div>
-            <div>teamTotalScores: {{ hsuStore.teamTotalScores() }}</div>
-          </div> -->
+            <div class="my-10">
+              <TeamLeadChart />
+            </div>
         </div>
       </div>
     </div>
@@ -113,7 +100,7 @@ const { pause, resume, isActive } = useIntervalFn(() => {
   if (!hideScoreboard) {
     hsuStore.refreshSheets()
   }
-}, 50000);
+}, 5000);
 
 function placement_to_trophy_svg(placement) {
   switch (placement) {
