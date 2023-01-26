@@ -24,10 +24,11 @@ const chartXAxis = "";
 
 function chartData() {
     const labels = []
+    labels.push('')
     const datasets = []
-    
-    const active_game_scores = hsuStore.activeGameScores;
-    const total_score_history = hsuStore.teamTotalScores();
+
+    const placements_history = hsuStore.teamPlacements()
+    const active_game_scores = hsuStore.activeGameScoresWithScore;
 
     for (const score_idx in active_game_scores) {
         if (Object.hasOwnProperty.call(active_game_scores, score_idx)) {
@@ -36,28 +37,47 @@ function chartData() {
         }
     }
 
-    for (let team_idx = 0; team_idx < hsuStore.num_teams; team_idx++)
-    {
+    for (let team_idx = 0; team_idx < hsuStore.num_teams; team_idx++) {
         const team = hsuStore.getTeamById((team_idx + 1).toString());
         const data = []
-        for (let label_idx = 0; label_idx < labels.length; label_idx++)
-        {
+        data.push(5)
+
+        for (let label_idx = 0; label_idx < labels.length; label_idx++) {
             const game_id = labels[label_idx];
-            const ts = total_score_history[game_id][team.id];
-            console.log(ts)
-            data.push(ts);
+            const placements = placements_history[game_id];
+            let found = false;
+
+            for (const place in placements) {
+                if (Object.hasOwnProperty.call(placements, place)) {
+                    const teams_array = placements[place];
+                    for (let ta_idx = 0; ta_idx < teams_array.length && !found; ta_idx++) {
+                        const team_id = teams_array[ta_idx];
+                        if (team_id == team.id) {
+                            data.push(place);
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            }
         }
+
         const dataset = {
             label: team.name,
             borderColor: `#${team.color}`,
-            data: data
+            borderWidth: 4,
+            data: data,
+            tension: 0
         };
+
         datasets.push(dataset);
     }
+
     console.log('labels')
     console.log(labels)
     console.log('datasets')
     console.log(datasets)
+
 
     return {
         labels: labels,
@@ -65,39 +85,34 @@ function chartData() {
     }
 }
 
-const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-        {
-            label: 'Team 1',
-            borderColor: '#0000ff',
-            data: [40, 39, 10, 40, 39, 80, 40]
-        },
-        {
-            label: 'Team 2',
-            borderColor: '#000000',
-            data: [10, 29, 11, 43, 3, 30, 10]
-        },
-        {
-            label: 'Team 3',
-            borderColor: '#008000',
-            data: [3, 39, 10, 2, 87, 80, 40]
-        },
-        {
-            label: 'Team 4',
-            borderColor: '#ff0000',
-            data: [2, 4, 10, 40, 3, 80, 6]
-
-        },
-        {
-            label: 'Team 5',
-            borderColor: '#ffff00',
-            data: [40, 76, 2, 40, 39, 12, 40]
-        }
-    ]
-}
 const options = {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    layout: {
+        padding: 5
+    },
+    scales: {
+        y: {
+            border: {
+                color: 'white'
+            },
+            beginAtZero: false,
+            ticks: {
+                stepSize: 1
+            },
+            reverse: true
+        },
+        x: {
+            border: {
+                color: 'white'
+            },
+        }
+    }
 }
+
 </script>

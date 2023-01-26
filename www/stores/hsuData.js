@@ -100,6 +100,7 @@ export const useHsuDataStore = defineStore('hsuStore', {
             }
         },
         teamPlayers(team_id) {
+            // join players list with teams list, returning just players for input team id
             let team_players = {};
             for (const player in this.players) {
                 if (Object.hasOwnProperty.call(this.players, player)) {
@@ -120,14 +121,13 @@ export const useHsuDataStore = defineStore('hsuStore', {
             const placements = {}
             for (let index = 1; index <= game_placements.length; index++) {
                 placements[index.toString()] = []
-                if (game_placements[index-1] == '--')
-                {
+                if (game_placements[index - 1] == '--') {
                     return []
                 }
             }
 
             for (let index = 1; index <= game_placements.length; index++) {
-                const score = game_placements[index-1]
+                const score = game_placements[index - 1]
                 // console.log(score)
                 placements[score].push(index)
             }
@@ -146,11 +146,10 @@ export const useHsuDataStore = defineStore('hsuStore', {
             for (let idx = 0; idx < game_score.scores.length; idx++) {
                 team_scores[idx + 1] = 0;
             }
-            
+
             // teamPositions is undefined, have -- in score :( 
             // so return 0 for all teams
-            if (team_placements.length == 0)
-            {
+            if (team_placements.length == 0) {
                 // console.log(`game ${game_idx} has -- score, returning 0 for all teams.`)
                 return team_scores;
             }
@@ -159,15 +158,13 @@ export const useHsuDataStore = defineStore('hsuStore', {
             for (let place = 1; place <= Object.keys(team_placements).length; place++) {
 
                 // Only one team placed at position, set their score
-                if (team_placements[place].length == 1)
-                {
+                if (team_placements[place].length == 1) {
                     const team_id = team_placements[place];
                     team_scores[team_id] = placement_to_score_map[place];
                 }
 
                 // Multiple teams tied for position
-                else if (team_placements[place].length >= 1)
-                {
+                else if (team_placements[place].length >= 1) {
                     const num_tied_teams = team_placements[place].length;
 
                     // Compute the tied
@@ -177,8 +174,7 @@ export const useHsuDataStore = defineStore('hsuStore', {
                     }
                     const tie_score = total_tie_score / num_tied_teams;
 
-                    for (let team_tied_idx = 0; team_tied_idx < num_tied_teams; team_tied_idx++)
-                    {
+                    for (let team_tied_idx = 0; team_tied_idx < num_tied_teams; team_tied_idx++) {
                         const team_id = team_placements[place][team_tied_idx];
                         team_scores[team_id] = tie_score;
                     }
@@ -255,8 +251,59 @@ export const useHsuDataStore = defineStore('hsuStore', {
             // "10": { "1": 46, "2": 30.5, "3": 36, "4": 48, "5": 40.5 } 
             // }
         },
-        teamPlacmentHistory() {
-            
+        teamPlacements() {
+            const placements = {};
+            const total_score_history = this.teamTotalScores();
+
+            for (const score_idx in total_score_history) {
+                if (Object.hasOwnProperty.call(total_score_history, score_idx)) {
+                    const score = total_score_history[score_idx];
+                    placements[score_idx] = this.convertDict(score);
+                }
+            }
+
+            return placements
+        },
+        convertDict(dict) {
+            // dict should be : {  "Team A": 10,  "Team B": 8,  "Team C": 8,  "Team D": 6,  "Team E": 6};
+            // Create an array of objects with the key and value as properties
+            let arr = Object.entries(dict).map(([key, value]) => ({ key, value }));
+
+            // Sort the array in descending order by value
+            arr.sort((a, b) => b.value - a.value);
+
+            // Initialize an empty dictionary for the new key-value pairs
+            let newDict = {};
+
+            // Initialize a variable to keep track of the current rank
+            let currentRank = 1;
+
+            // Iterate through the sorted array
+            for (let i = 0; i < arr.length; i++) {
+                // If the current element has the same value as the previous element
+                // and is not the first element in the array
+                if (i > 0 && arr[i].value === arr[i - 1].value) {
+                    // Skip the current rank
+                }
+                // If the current element does not have the same value as the previous element
+                // or is the first element in the array
+                else {
+                    // Set the current rank to the current index + 1
+                    currentRank = i + 1;
+                }
+                // If the current rank is not already a key in the new dictionary
+                if (!newDict[currentRank]) {
+                    // Add the current rank as a key and an array containing the current key as the value
+                    newDict[currentRank] = [arr[i].key];
+                }
+                // If the current rank is already a key in the new dictionary
+                else {
+                    // Push the current key to the existing array of keys
+                    newDict[currentRank].push(arr[i].key);
+                }
+            }
+
+            return newDict;
         },
         getTeamById(team_id) {
             for (const team_name in this.teams) {
@@ -268,6 +315,6 @@ export const useHsuDataStore = defineStore('hsuStore', {
                 }
             }
             return {};
-        }
+        },
     },
 })
