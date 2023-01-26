@@ -11,17 +11,17 @@
         <div v-if="hsuStore.loaded" v-for="(game, index) in hsuStore.games" :key="index" class="">
           <!-- Game Card -->
           <div v-if="game.show === 'TRUE'"
-            class="flex flex-col text-white mx-auto mt-6 md:mx-36 mb-12 text-base md:text-xl space-y-2 p-1 md:p-0">
-            <div class="border-slate-500 border p-4">
+            class="flex flex-col text-white mx-auto mt-6 md:mx-36 mb-20 text-base md:text-xl space-y-2 p-1 md:p-0 border-stone-900">
+            <div class="p-4 bg-stone-900 rounded-sm">
               <div>
-                <p class="text-sm md:text-base text-slate-500 text-start lg:absolute p-1">Game {{ game.id }}</p>
+                <!-- <p class="text-sm md:text-base text-slate-500 text-start lg:absolute p-1">Game {{ game.id }}</p> -->
                 <h1 class="text-6xl text-hsu-red mb-6 text-center">
                   {{ game.name }}
                 </h1>
               </div>
               <!-- if desktop -->
-              <div class="flex flex-row text-center lg:visible collapse">
-                <table class="table-auto border-collapse w-full h-auto bg-black">
+              <div class="flex flex-row text-center lg:block hidden">
+                <table class="table-auto border-collapse w-full h-auto">
                   <thead>
                     <tr class="text-hsu-red">
                       <th v-if="game.order" class="p-1 w-1/3">Objective</th>
@@ -33,11 +33,11 @@
                   </thead>
                   <tbody>
                     <tr class="py-3">
-                      <td v-if="game.order" class="p-1 text-justify align-top px-4 w-1/3">{{ game.obj }}</td>
-                      <td v-if="game.order" class="p-1 text-justify align-top px-4 w-1/3">{{ game.format }}</td>
-                      <td v-if="game.order" class="p-1 text-justify align-top px-4 w-1/3">{{ game.order }}</td>
-                      <td v-if="!game.order" class="p-1 text-justify align-top px-4 w-1/2">{{ game.obj }}</td>
-                      <td v-if="!game.order" class="p-1 text-justify align-top px-4 w-1/2">{{ game.format }}</td>
+                      <td v-if="game.order" class="p-1 align-top px-4 w-1/3">{{ game.obj }}</td>
+                      <td v-if="game.order" class="p-1 align-top px-4 w-1/3">{{ game.format }}</td>
+                      <td v-if="game.order" class="p-1 align-top px-4 w-1/3">{{ game.order }}</td>
+                      <td v-if="!game.order" class="p-1 align-top px-4 w-1/2">{{ game.obj }}</td>
+                      <td v-if="!game.order" class="p-1 align-top px-4 w-1/2">{{ game.format }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -53,16 +53,16 @@
                   <p>{{ game.format }}</p>
                 </div>
                 <div>
-                  <h2 v-if="game.order" class="text-hsu-red">Order</h2>
+                  <h2 v-if="game.order" class="text-hsu-red">Team Order</h2>
                   <p>{{ game.order }}</p>
                 </div>
               </div>
             </div>
             <!-- Image and Rules -->
-            <div>
+            <div class="px-4">
               <h2 class="text-hsu-red">Rules</h2>
               <!-- Image -->
-              <img :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details" class="aspect-auto h-96 md:h-[50rem] w-auto md:float-right m-2 md:m-6" onerror='this.style.display = "none"' />
+              <img v-if="game.img" :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details" class="aspect-auto h-96 md:h-[30rem] xl:h-[52rem] w-auto md:float-right m-2 md:m-6 mx-auto" onerror='this.style.display = "none"' />
               <!-- Rules Section -->
               <div v-for="[index, rule_str] in game.rules.split('\n').entries()" :key="index" class="">
                 <!-- 0 -->
@@ -106,7 +106,7 @@
               </div>
               <!-- <p>{{ game.rules.split('\n') }}</p> -->
             </div>
-            <div v-if="game.scoring">
+            <div v-if="game.scoring" class="px-4">
               <h2 class="text-hsu-red">Scoring</h2>
               <div v-for="[index, str] in game.scoring.split('\n').entries()" :key="index">
                 <!-- 0 -->

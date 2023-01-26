@@ -29,7 +29,7 @@
                 </div>
                 </th>
                 <th :class="`${tableHeaderBaseClass} text-hsu-red border-b-2`">
-                  <div class="w-32 pb-3">
+                  <div class="w-32 pb-3 mx-auto">
                     Total Score
                   </div>
                 </th>
@@ -47,7 +47,7 @@
                   <!-- team: {{team.id - 1 }}, game: {{ score.id }}, score: {{ score.scores[team.id - 1] }} -->
                   <!-- Single Score Display -->
                   <div class="flex flex-row grow">
-                    <div v-if="score.scores[team.id - 1] !== '--'" class="w-6 h-6 m-auto absolute">
+                    <div v-if="score.scores[team.id - 1] !== '--'" class="w-7 h-7 m-auto absolute">
                       <!-- {{ score.scores[team.id - 1] }} -->
                       <img :src="placement_to_trophy_svg(score.scores[team.id - 1])" alt="" class="bg-black">
                     </div>
@@ -103,8 +103,8 @@ import place4 from "assets/svgs/place4.svg";
 import place5 from "assets/svgs/place5.svg";
 
 const tableClass ="table-auto border-collapse mt-8 bg-black mx-auto";
-const tableHeaderBaseClass = `md:text-2xl text-base border-hsu-red my-2`;
-const tableRowBaseClass = `text-4xl text-center h-12 w-auto border-slate-500 p-2`;
+const tableHeaderBaseClass = `md:text-xl text-base border-hsu-red my-2`;
+const tableRowBaseClass = `text-4xl text-center h-12 w-auto border-stone-900 p-2`;
 
 const hsuStore = useHsuDataStore()
 if (!hsuStore.loaded) {
