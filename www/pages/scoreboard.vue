@@ -62,7 +62,7 @@
             <div class="flex flex-row ml-auto text-sm md:text-base text-slate-500 text-right p-1">
               Last Updated: {{ hsuStore.lastUpdated }}
             </div>
-            <div class="my-10">
+            <div class="my-10 bg-stone-900">
               <TeamLeadChart />
             </div>
         </div>
