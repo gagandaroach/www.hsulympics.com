@@ -1,7 +1,7 @@
 <template>
   <section>
     <div>
-      <div v-if="hideGames"
+      <div v-if="!hsuStore.live"
         class="container flex flex-col text-hsu-red tracking-wide md:text-lg text-xs mx-auto mt-60 text-center">
         <div>wouldn't hs-you like to know : )</div>
       </div>
@@ -168,14 +168,10 @@
 import { useHsuDataStore } from "~/stores/hsuData";
 
 const hsuStore = useHsuDataStore();
-if (!hsuStore.loaded) {
-  hsuStore.refreshSheets();
-}
 
 useHead({
   title: "Games",
 });
 
-const hideGames = false;
 const class_list = "list-inside pl-8"
 </script>

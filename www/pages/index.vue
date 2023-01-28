@@ -11,6 +11,10 @@
       <p class="text-base">January 28, 2023</p>
     </div>
       <!-- <p class="text-base">San Mateo, CA</p> -->
+      <!-- <div>currentTime: {{ hsuStore.currentTime }}</div>
+      <div>live: {{ hsuStore.live }}</div>
+      <div>intervalTimer: {{ hsuStore.intervalTimer }}</div>
+      <div>diffTime: {{ hsuStore.diffTime }}</div> -->
     <div v-if="!hsuStore.live" class="flex flex-row m-10">
       <CountDown end="January 28, 2023" />
     </div>

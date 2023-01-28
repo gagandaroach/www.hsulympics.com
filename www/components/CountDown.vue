@@ -87,7 +87,7 @@ export default {
   },
   watch: {
     now(value) {
-      this.diff = 1674925200 - this.now;
+      this.diff = 1674927000 - this.now;
       if (this.diff <= 0 || this.stop) {
         this.diff = 0;
         // Remove interval
@@ -112,7 +112,7 @@ export default {
 <style>
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 1s ease;
+  transition: opacity 0.25s ease;
 }
 
 .v-enter-from,

@@ -77,7 +77,7 @@ if (!hsuStore.loaded) {
 // update countdown timer
 const fun1 = useIntervalFn(() => {
   hsuStore.updateCurrentTime()
-}, 50);
+}, 250);
 // refresh google sheets data every few seconds
 const fun2 = useIntervalFn(() => {
   if (hsuStore.refreshEnabled) {

@@ -25,8 +25,8 @@ export const useHsuDataStore = defineStore('hsuStore', {
         // timer / live
         currentTime: Math.trunc(new Date().getTime() / 1000),
         intervalTimer: null,
-        endTime: Math.trunc(new Date().getTime() / 1000) + 3
-        // endTime: 1674927000,
+        endTime: 1674927000,
+        // endTime: Math.trunc(new Date().getTime() / 1000) + 3,
     }),
     getters: {
         live(state) {
