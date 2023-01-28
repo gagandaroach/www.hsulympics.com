@@ -96,11 +96,12 @@ useHead({
 
 const hideScoreboard = false;
 const rotateTable = useState("rotateTable", () => false);
+
 const { pause, resume, isActive } = useIntervalFn(() => {
-  if (!hideScoreboard) {
+  if (hsuStore.refreshEnabled) {
     hsuStore.refreshSheets()
   }
-}, 5000);
+}, hsuStore.refreshInterval);
 
 function placement_to_trophy_svg(placement) {
   switch (placement) {

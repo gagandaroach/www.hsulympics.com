@@ -17,11 +17,24 @@ export const useHsuDataStore = defineStore('hsuStore', {
         scores: [],
         lastUpdated: new Date().toLocaleString(),
         // state
+        refreshEnabled: true,
+        refreshInterval: 5000,
         loaded: false,
         loading: false,
-        error: null
+        error: null,
+        // timer / live
+        currentTime: Math.trunc(new Date().getTime() / 1000),
+        intervalTimer: null,
+        endTime: 1674927000,
+        // endTime: (1674927000 - 21281)
     }),
     getters: {
+        live(state) {
+            return (state.endTime - state.currentTime) <= 0;
+        },
+        diffTime(state) {
+            return (state.endTime - state.currentTime)
+        },
         activeGames(state) {
             let active = {};
             for (const game in state.games) {
@@ -81,6 +94,9 @@ export const useHsuDataStore = defineStore('hsuStore', {
         }
     },
     actions: {
+        updateCurrentTime() {
+            this.currentTime = Math.trunc(new Date().getTime() / 1000);
+        },
         async refreshSheets() {
             this.loading = true;
             try {

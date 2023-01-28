@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+import { useIntervalFn } from "@vueuse/core"; // VueUse helper, install it
 import HsuChar from "assets/svgs/hsuCharacter.svg";
 import HsuRabbit from "assets/svgs/rabbit_web_home_page.svg";
 import { useHsuDataStore } from "~/stores/hsuData";
@@ -40,4 +41,12 @@ const hsuStore = useHsuDataStore();
 if (!hsuStore.loaded) {
   hsuStore.refreshSheets()
 };
+const fun1 = useIntervalFn(() => {
+  hsuStore.updateCurrentTime()
+}, 50);
+const fun2 = useIntervalFn(() => {
+  if (hsuStore.refreshEnabled) {
+    hsuStore.refreshSheets()
+  }
+}, hsuStore.refreshInterval);
 </script>
