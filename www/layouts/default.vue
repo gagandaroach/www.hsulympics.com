@@ -7,8 +7,8 @@
 
         <div class="flex flex-col">
           <div class="flex flex-row space-x-1">
-            <!-- <img :src="HsuChar" alt="" class="flex bg-black mr-1 md:h-10 h-6" /> -->
-            <img :src="HsuRabbit" alt="" class="flex bg-black mr-1 md:h-10 h-6" />
+            <img v-if="hsuStore.live" :src="HsuRabbit" alt="" class="flex bg-black mr-1 md:h-10 h-6" />
+            <img v-else :src="HsuChar" alt="" class="flex bg-black mr-1 md:h-10 h-6" />
             <NuxtLink to="/" :class="headerTitleClass" :active-class="headerTitleActiveClass">Hsulympics VI</NuxtLink>
           </div>
 
@@ -43,6 +43,8 @@
 </template>
 
 <script setup>
+import { useIntervalFn } from "@vueuse/core"; // VueUse helper, install it
+import { useHsuDataStore } from "~/stores/hsuData";
 import HsuChar from "assets/svgs/hsuCharacter.svg";
 import HsuRabbit from "assets/svgs/rabbit_web_home_page.svg";
 
@@ -59,7 +61,6 @@ useHead({
  ]
 });
 
-
 const headerClass = "flex justify-between text-white md:p-3 p-1";
 const headerTitleClass = "flex md:text-4xl text-base";
 const headerPlugClass = "md:text-base text-xs tracking-widest";
@@ -67,6 +68,22 @@ const headerTitleActiveClass = ""
 const buttonCommonClass = "flex text-center md:text-lg text-xs md:p-3 p-1";
 const buttonClass = `${buttonCommonClass} my-2 self-center`;
 const buttonActiveClass = `${buttonCommonClass} text-hsu-red`;
+
+// Store Timers :)
+const hsuStore = useHsuDataStore();
+if (!hsuStore.loaded) {
+  hsuStore.refreshSheets()
+};
+// update countdown timer
+const fun1 = useIntervalFn(() => {
+  hsuStore.updateCurrentTime()
+}, 50);
+// refresh google sheets data every few seconds
+const fun2 = useIntervalFn(() => {
+  if (hsuStore.refreshEnabled) {
+    hsuStore.refreshSheets()
+  }
+}, hsuStore.refreshInterval);
 </script>
 
 <style>

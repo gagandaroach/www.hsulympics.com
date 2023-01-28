@@ -2,7 +2,11 @@
   <div class="container flex-col m-auto my-14 md:my-20 text-white text-center">
     <img v-if="hsuStore.live" :src="HsuRabbit" alt="" class="w-64 h-64 m-auto">
     <img v-else :src="HsuChar" alt="" class="w-64 h-64 m-auto">
-    <div class="mt-2 text-hsu-red">
+    <div v-if="hsuStore.live" class="mt-2 text-hsu-red">
+      <h1 class="text-4xl">Hsulympics VI</h1>
+      <p class="text-base">January 28, 2023</p>
+    </div>
+    <div v-else class="mt-2">
       <h1 class="text-4xl">Hsulympics VI</h1>
       <p class="text-base">January 28, 2023</p>
     </div>
@@ -32,21 +36,9 @@
 </template>
 
 <script setup>
-import { useIntervalFn } from "@vueuse/core"; // VueUse helper, install it
 import HsuChar from "assets/svgs/hsuCharacter.svg";
 import HsuRabbit from "assets/svgs/rabbit_web_home_page.svg";
 import { useHsuDataStore } from "~/stores/hsuData";
 
 const hsuStore = useHsuDataStore();
-if (!hsuStore.loaded) {
-  hsuStore.refreshSheets()
-};
-const fun1 = useIntervalFn(() => {
-  hsuStore.updateCurrentTime()
-}, 50);
-const fun2 = useIntervalFn(() => {
-  if (hsuStore.refreshEnabled) {
-    hsuStore.refreshSheets()
-  }
-}, hsuStore.refreshInterval);
 </script>

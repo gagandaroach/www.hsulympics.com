@@ -1,6 +1,6 @@
 <template>
   <section class="mx-auto space-y-2 bg-black">
-    <div v-if="hideScoreboard" class="container flex flex-col text-hsu-red md:text-lg text-xs mx-auto mt-60 text-center">
+    <div v-if="!hsuStore.live" class="container flex flex-col text-hsu-red md:text-lg text-xs mx-auto mt-60 text-center">
       coming hs-oon
     </div>
     <div v-else class="mx-auto">
@@ -72,7 +72,6 @@
 </template>
 
 <script setup>
-import { useIntervalFn } from "@vueuse/core"; // VueUse helper, install it
 import { useHsuDataStore } from "~/stores/hsuData";
 
 import place1 from "assets/svgs/place1.svg";
@@ -86,22 +85,12 @@ const tableHeaderBaseClass = `md:text-xl text-base border-hsu-red my-2`;
 const tableRowBaseClass = `text-4xl text-center h-12 w-auto border-stone-900 p-2`;
 
 const hsuStore = useHsuDataStore()
-if (!hsuStore.loaded) {
-  hsuStore.refreshSheets()
-};
 
 useHead({
   title: "Scoreboard",
 });
 
-const hideScoreboard = false;
 const rotateTable = useState("rotateTable", () => false);
-
-const { pause, resume, isActive } = useIntervalFn(() => {
-  if (hsuStore.refreshEnabled) {
-    hsuStore.refreshSheets()
-  }
-}, hsuStore.refreshInterval);
 
 function placement_to_trophy_svg(placement) {
   switch (placement) {
