@@ -11,10 +11,10 @@
         <div v-if="hsuStore.loaded" v-for="(game, index) in hsuStore.games" :key="index" class="">
           <!-- Game Card -->
           <div v-if="game.show === 'TRUE'"
-            class="flex flex-col text-white mx-auto mt-6 md:mx-36 mb-20 text-base md:text-xl space-y-2 p-1 md:p-0 border-stone-900">
+            class="flex flex-col text-white mx-auto mt-6 md:mx-36 mb-20 text-base md:text-2xl space-y-2 p-1 md:p-0 border-stone-900">
             <div class="p-4 bg-stone-900 rounded-sm">
               <div>
-                <!-- <p class="text-sm md:text-base text-slate-500 text-start lg:absolute p-1">Game {{ game.id }}</p> -->
+                <p class="text-sm md:text-base text-slate-500 text-start lg:absolute p-1">Game {{ game.id }}</p>
                 <h1 class="text-6xl text-hsu-red mb-6 text-center">
                   {{ game.name }}
                 </h1>
@@ -45,27 +45,27 @@
               <!-- if mobile -->
               <div class="flex flex-col lg:hidden visible">
                 <div>
-                  <h2 class="text-hsu-red">Objective</h2>
+                  <h2 class="text-hsu-red mt-2">Objective</h2>
                   <p>{{ game.obj }}</p>
                 </div>
                 <div>
-                  <h2 class="text-hsu-red">Format</h2>
+                  <h2 class="text-hsu-red mt-2">Format</h2>
                   <p>{{ game.format }}</p>
                 </div>
                 <div>
-                  <h2 v-if="game.order" class="text-hsu-red">Team Order</h2>
+                  <h2 v-if="game.order" class="text-hsu-red mt-2">Team Order</h2>
                   <p>{{ game.order }}</p>
                 </div>
               </div>
             </div>
             <!-- Image and Rules -->
             <div class="px-4">
-              <h2 class="text-hsu-red">Rules</h2>
               <!-- Image -->
               <img v-if="game.img" :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details"
-                class="aspect-auto h-96 md:h-[30rem] xl:h-[35rem] w-auto md:float-right m-2 md:m-6 mx-auto"
+                class="aspect-auto h-96 md:h-[30rem] xl:h-[35rem] w-auto md:float-right m-2 md:m-6 mx-auto hidden md:block"
                 onerror='this.style.display = "none"' />
               <!-- Rules Section -->
+              <h2 class="text-hsu-red">Rules</h2>
               <div v-for="[index, rule_str] in game.rules.split('\n').entries()" :key="index" class="">
                 <!-- 0 -->
                 <p class="mt-2" v-if="parseInt(rule_str[0]) == 0">{{ rule_str.substr(1) }}</p>
@@ -150,6 +150,10 @@
                   </ul>
                 </div>
               </div>
+              <!-- Image -->
+              <img v-if="game.img" :src="`https://drive.google.com/uc?id=${game.img}`" alt="Google Drive Game Details"
+                class="aspect-auto h-auto w-64 md:float-right m-2 mt-12 mx-auto block md:hidden"
+                onerror='this.style.display = "none"' />
             </div>
             <!-- <p>_dump: {{ game }}</p> -->
           </div>

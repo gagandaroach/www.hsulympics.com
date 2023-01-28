@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col px-8 pb-20 h-[30rem]">
         <div class="text-4xl text-white text-center p-4">
-            Team Rank
+            Team Standings
         </div>
         <Line id="my-chart-id" :options="options" :data="chartData()" />
     </div>

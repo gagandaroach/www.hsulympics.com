@@ -6,8 +6,9 @@
       <div>
 
         <div class="flex flex-col">
-          <div class="flex flex-row">
-            <img :src="HsuChar" alt="" class="flex bg-black mr-1 md:h-10 h-6" />
+          <div class="flex flex-row space-x-1">
+            <!-- <img :src="HsuChar" alt="" class="flex bg-black mr-1 md:h-10 h-6" /> -->
+            <img :src="HsuRabbit" alt="" class="flex bg-black mr-1 md:h-10 h-6" />
             <NuxtLink to="/" :class="headerTitleClass" :active-class="headerTitleActiveClass">Hsulympics VI</NuxtLink>
           </div>
 
@@ -43,6 +44,7 @@
 
 <script setup>
 import HsuChar from "assets/svgs/hsuCharacter.svg";
+import HsuRabbit from "assets/svgs/rabbit_web_home_page.svg";
 
 const webpageMainTitle = "Hsulympics"
 const localTitleChunk = useState('title', () => webpageMainTitle)
