@@ -1,8 +1,8 @@
 <template>
   <div class="container flex-col m-auto my-14 md:my-20 text-white text-center">
     <div v-if="hsuStore.loaded" class="w-[15rem] h-[15rem] m-auto mb-6">
-      <!-- <img :src="HsuChar" alt="" class=""> -->
-      <img :src="HsuRabbit" alt="" class="">
+      <img v-if="!hsuStore.live" :src="HsuChar" alt="" class="">
+      <img v-else :src="HsuRabbit" alt="" class="">
     </div>
 
     <div v-if="hsuStore.loaded" class="mb-10 text-2xl text-white">
